@@ -3,7 +3,7 @@ import React from 'react'
 import {redirect} from 'next/navigation'
 import InputFields from '@/app/components/checkout/InputFields'
 import { BsDot, BsStarFill, BsStarHalf } from 'react-icons/bs';
-import Image from 'next/legacy/Image'
+import Image from 'next/legacy/image'
 export default async function Page({params}) {
     //CONTROL RATING
     const Stars = (num)=>{
