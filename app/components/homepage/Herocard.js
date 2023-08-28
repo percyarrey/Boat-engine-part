@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 
-import Image from "next/legacy/Image";
+import Image from "next/legacy/image";
 import { useRouter } from 'next/navigation';
 function Herocard(props) {
   const router = useRouter() 

@@ -1,5 +1,5 @@
 'use client'
-import Image from 'next/legacy/Image'
+import Image from 'next/legacy/image'
 import React, { useState } from 'react'
 
 export default function Thumbnails(props) {

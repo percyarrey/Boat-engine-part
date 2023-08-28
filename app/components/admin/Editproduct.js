@@ -7,7 +7,7 @@ import { MoonLoader } from 'react-spinners'
 import { Box, Button, TextField } from '@mui/material'
 
 
-import Image from 'next/legacy/Image'
+import Image from 'next/legacy/image'
 import { BsPlus } from 'react-icons/bs'
 import { toast } from 'react-toastify'
 
