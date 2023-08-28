@@ -19,7 +19,7 @@ export default async function Home() {
   const data = await getProduct()
   if(!data){
     return (
-      <div className=' text-lg'>No Product Found</div>
+      <div className=' text-lg'>No Product Found <Link href='/' color=' text-sky-600 '>!Try again</Link></div>
     )
   }
   const slider1 = data.slice(3,7)

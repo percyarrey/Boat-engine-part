@@ -20,11 +20,23 @@ import Image from "next/image"
 import { signOut, useSession } from 'next-auth/react';
 
 //REDUX
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import { addWishlist } from '@/store/wishlistSlice'
+
+//LOGO
+import {logo} from './logo'
 function Header() {
   //REACT REDUX
   const wishlist = useSelector((state)=>state.wishlist.wishlist)
-  
+  const dispatch = useDispatch()
+  //LOCAL STORAGE
+  useEffect(()=>{
+    var wishlist =  localStorage?.getItem('wishlist')
+    wishlist = JSON.parse(wishlist)
+    console.log(wishlist)
+    dispatch(addWishlist(wishlist))
+
+  },[])
   //SESSION
   const { data, status,loading } = useSession()
 
@@ -86,8 +98,8 @@ function Header() {
       <nav className="fixed h-[4rem] bg-white w-full z-20  left-0 border-b  border-gray-200 dark:border-gray-600 lg:px-8 pl-2">
         <div ref={SearchHiding} className="flex flex-wrap  items-center  mx-auto py-4 w-full  justify-between">
         <Link href='/' className="flex w-2/12 mb-3 sm:w-4/12 md:w-3/12 items-center">
-            <Image src="/logo.png"
-            height={60} width={60} style={{width:'auto',height:'auto'}} className=" mr-3" alt="Creativepart"/>
+            <Image src={logo}
+            height={60} width={60} className=" mr-3" alt="Creativepart"/>
             <span className="self-center  hidden  sm:flex text-2xl font-bold  whitespace-nowrap mytxt">{"CreativePart's"}</span>
         </Link>
         {/* SEARCH BAR */}

@@ -33,7 +33,7 @@ export default function Dealproducts(props) {
                 }
             )()
         }
-    },[inView])
+    },[inView,page])
 
 
   return (

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import {usePathname} from 'next/navigation'
 import { BsQuestionCircle } from 'react-icons/bs'
+import { logo } from './logo'
  function Footer() {
   //NAVIGATION
   const pathname =usePathname()
@@ -18,8 +19,8 @@ import { BsQuestionCircle } from 'react-icons/bs'
         <div className='flex flex-wrap px-1 lg:px-6'>
           <div className='w-6/12 md:w-3/12 h-full'>
             <Link href='/' className="flex items-center">
-                <Image src="/logo.png"
-                height={60} width={60} alt="Creativepart"/>
+                <Image  src={logo}
+            height={60} width={60} alt="Creativepart"/>
                 <span className="self-center  hidden  sm:flex text-2xl font-bold  whitespace-nowrap mytxt">{"CreativePart's"}</span>
             </Link>
             <p className=' text-sm'>
