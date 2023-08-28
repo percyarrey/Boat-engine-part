@@ -10,7 +10,7 @@ import {MoonLoader} from 'react-spinners'
 import GoogleButton from 'react-google-button'
 import {signIn} from 'next-auth/react'
 
-import Image from 'next/legacy/Image'
+import Image from 'next/legacy/image'
 import { Button } from '@mui/material'
 
 //NAVIGATION

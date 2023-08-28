@@ -1,6 +1,6 @@
 'use client'
 import { Badge, Button, IconButton, Tooltip } from '@mui/material'
-import Image from 'next/legacy/Image'
+import Image from 'next/legacy/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 

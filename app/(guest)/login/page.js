@@ -10,7 +10,7 @@ import { MoonLoader} from 'react-spinners'
 
 
 import { useRouter } from 'next/navigation'
-import Image from 'next/legacy/Image'
+import Image from 'next/legacy/image'
 import { Button } from '@mui/material'
 
 //NEXT AUTH

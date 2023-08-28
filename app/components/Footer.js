@@ -1,5 +1,5 @@
 'use client'
-import Image from 'next/legacy/Image'
+import Image from 'next/legacy/image'
 import Link from 'next/link'
 import React from 'react'
 import {usePathname} from 'next/navigation'
