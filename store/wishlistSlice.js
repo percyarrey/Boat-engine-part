@@ -1,9 +1,9 @@
 'use client'
 import {createSlice} from '@reduxjs/toolkit'
-var wishlist =  localStorage?.getItem('wishlist')
-wishlist = JSON.parse(wishlist)
+/* var wishlist =  localStorage?.getItem('wishlist')
+wishlist = JSON.parse(wishlist) */
 const initialState = {
-    wishlist : wishlist || []
+    wishlist : []
 }
 
 export const wishlistSlice = createSlice({
