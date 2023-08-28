@@ -71,6 +71,10 @@ export const getDealProduct = async (page, searchParams) => {
       cache: "force-cache",
     });
     const { data } = await res.json(); */
+    data = data.map((e,index)=>{
+      e.image={img1:e.image.img1}
+        return e
+    })
     return { data: JSON.parse(JSON.stringify(data)), npage: hasNextPage };
 
 };
