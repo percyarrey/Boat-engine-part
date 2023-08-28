@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mybg{
+  background-color: #003D29;
+}
+.mytxt{
+  color:#1a5843;
+  font-family: Helvetica, sans-serif,Arial ;
+}
+body{
+  font-family: Roboto;
+  @apply text-gray-900;
+}
+.swiper {
+  width: 100%;
+}
+
+.fade-edge-swiper {
+  position: relative;
+  overflow: hidden;
+}
+
+.fade-edge-swiper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.037));
+  pointer-events: none;
+  z-index: 1;
+}
+@media (min-width: 1024px) {
+  .fade-edge-swiper::after {
+    @apply lg:hidden;
+  }
+}
+
+.myCard img{
+  scale: 1;
+  transition:all 0.3s ease;
+}
+.myCard:hover img{
+  scale: 1.13;
+  
+}
+
+.scale-image {
+  position: relative;
+}
+
+.scale-image::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url("/homepage/discount.jpg");
+  background-repeat: 'no-repeat';
+  background-position: 'top';
+  background-size: cover;
+  transition: transform 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.scale-image:hover::before {
+  transform: scale(1.15);
+}
