@@ -9,7 +9,6 @@ import Homeproducts from './components/homepage/Homeproducts';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 
-
 export default async function Home() {
   const data = await getProducts()
   if(!data){
