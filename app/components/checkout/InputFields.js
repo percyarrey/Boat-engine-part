@@ -2,6 +2,8 @@
 import { Button } from '@mui/material'
 import React, {useState} from 'react'
 import {useRouter} from 'next/navigation'
+import CountrySelector from '@/app/components/Countries/selector';
+import { COUNTRIES } from "@/app/components/Countries/countries";
 export default function InputFields() {
   const router = useRouter()
   const [data,setdata]=React.useState({
@@ -28,12 +30,37 @@ export default function InputFields() {
     e.preventDefault();
     router.push('/checkout')
   }
+
+
+  //SELECTOR
+  const [isOpen, setIsOpen] = useState(false);
+  // Default this to a country's code to preselect it
+  const [country, setCountry] = useState("US");
+
   return (
     <div className='pb-6 w-full  max-w-[45rem]  pt-1'>
       <h2 className='mytxt text-center'>Enter Your Address</h2>
       <form onSubmit={handleSubmit}>
           <div className="grid gap-2 mb-2 ">
-            
+            {/* COUNTRY */}
+            <div>
+            <div
+                  className={"w-full"}
+                >
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Select a country
+                    </label>
+                    <CountrySelector
+                      id={"country-selector"}
+                      open={isOpen}
+                      onToggle={() => setIsOpen(!isOpen)}
+                      onChange={setCountry}
+                      selectedValue={COUNTRIES.find((option) => option.value === country)}
+                    />
+                  </div>
+                </div>
+            </div>
             {/*NAME */}
               <div>
                   <input name='fname' type="text" value={data.fname} onChange={handleChange} id="fname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Full name"/>

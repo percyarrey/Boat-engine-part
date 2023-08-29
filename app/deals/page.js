@@ -7,6 +7,11 @@ import { v4 as uuidv4 } from 'uuid'
 export default async function page({searchParams}) {
   const {data} = await getDealProduct(0,searchParams)
   const uuid = uuidv4()
+  if(!data){
+    return (
+      <div className=' text-lg'>No Product Found <Link href='/' color=' text-sky-600 '>!Try again</Link></div>
+    )
+  }
   return (
     <>
       <section  key={uuid}>
