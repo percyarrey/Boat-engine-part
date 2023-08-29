@@ -1,4 +1,4 @@
-import Products from "@/models/Products";
+import Products from "../models/Products";
 import connectDB from "../utils/connectDB";
 import mongoose from "mongoose";
 

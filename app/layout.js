@@ -2,8 +2,8 @@ import './globals.css'
 
 
 //COMPONENTS
-import Header from '@/app/components/Header'
-import Footer from '@/app/components/Footer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import HeaderToggler from './components/header/HeaderToggler'
 import { Suspense } from 'react'
 import Loading from './loading'
@@ -21,6 +21,8 @@ export const metadata = {
   title: `Creative Part's - Buy boats engine`,
   description: `We sell engine boats part's  of all type of boat`,
 }
+
+
 
 export default function RootLayout({ children }) {
   

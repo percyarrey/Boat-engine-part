@@ -12,7 +12,7 @@ import { BsPlus } from 'react-icons/bs'
 import { toast } from 'react-toastify'
 
 
-import ImageCompiling from '@/utils/ImageCompiling'
+import ImageCompiling from '../../../utils/ImageCompiling'
 import axios from 'axios'
 
 function Page() {

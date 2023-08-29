@@ -2,8 +2,8 @@
 import { Button } from '@mui/material'
 import React, {useState} from 'react'
 import {useRouter} from 'next/navigation'
-import CountrySelector from '@/app/components/Countries/selector';
-import { COUNTRIES } from "@/app/components/Countries/countries";
+import CountrySelector from '../Countries/selector';
+import { COUNTRIES } from "../Countries/countries";
 export default function InputFields() {
   const router = useRouter()
   const [data,setdata]=React.useState({

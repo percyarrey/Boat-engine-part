@@ -1,11 +1,10 @@
-import Herovideo from '@/app/components/homepage/Herovideo';
+import Herovideo from './components/homepage/Herovideo';
 import Carousel from "./components/homepage/Carousel";
 
 import Slider from "./components/homepage/Slider";
 import Discount from './components/homepage/Discount';
 import Trending from './components/homepage/Trending';
-import  getProducts  from '@/services/getProducts';
-import Card from './components/Card';
+import  getProducts  from '../services/getProducts';
 import Homeproducts from './components/homepage/Homeproducts';
 import { Button } from '@mui/material';
 import Link from 'next/link';

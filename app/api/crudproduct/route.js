@@ -1,5 +1,5 @@
-import connectDB from "@/utils/connectDB";
-import Products from "@/models/Products";
+import connectDB from "../../../utils/connectDB";
+import Products from "../../../models/Products";
 import {NextResponse } from "next/server";
 
 export async function POST(request){

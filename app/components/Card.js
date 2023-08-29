@@ -8,7 +8,7 @@ import { BsHeart, BsHeartFill, BsStarFill, BsStarHalf } from 'react-icons/bs'
 
 //REDUX
 import { useDispatch, useSelector } from 'react-redux'
-import { addWishlist } from '@/store/wishlistSlice'
+import { addWishlist } from '../../store/wishlistSlice'
 import { toast } from 'react-toastify'
 
 //SESSION

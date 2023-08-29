@@ -1,7 +1,7 @@
-import { Button } from '@mui/material'
+
 import React from 'react'
 import Category from '../components/deals/Category'
-import getDealProduct from '@/services/getDealProducts'
+import getDealProduct from '../../services/getDealProducts'
 import Dealproducts from '../components/deals/Dealproducts'
 import { v4 as uuidv4 } from 'uuid'
 export default async function page({searchParams}) {

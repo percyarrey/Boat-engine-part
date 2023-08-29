@@ -1,8 +1,7 @@
 
-import Thumbnails from '@/app/components/deals/Thumbnails';
-import Wishlistbtn from '@/app/components/deals/wishlistbtn';
-import { getDealDetails } from '@/services/getDealDetails';
-import { Button } from '@mui/material';
+import Thumbnails from '../../components/deals/Thumbnails';
+import Wishlistbtn from '../../components/deals/wishlistbtn';
+import { getDealDetails } from '../../../services/getDealDetails';
 import { redirect } from 'next/navigation';
 import React from 'react'
 import { BsDot, BsStarFill, BsStarHalf } from 'react-icons/bs';

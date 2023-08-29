@@ -21,7 +21,7 @@ import { signOut, useSession } from 'next-auth/react';
 
 //REDUX
 import {useDispatch, useSelector} from 'react-redux'
-import { addWishlist } from '@/store/wishlistSlice'
+import { addWishlist } from '../../store/wishlistSlice'
 
 //LOGO
 import {logo} from './logo'

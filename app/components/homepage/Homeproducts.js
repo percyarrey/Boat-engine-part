@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Card from '../Card'
 
 import {useInView} from 'react-intersection-observer'
-import { fetchProducts } from '@/server actions/actions'
+import { fetchProducts } from '../../../server actions/actions'
 
 export default function Homeproducts() {
     const [products,setProducts]=useState()

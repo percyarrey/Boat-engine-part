@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Card from '../Card'
 
 import {useInView} from 'react-intersection-observer'
-import { fetchDealProducts } from '@/server actions/actions'
+import { fetchDealProducts } from '../../../server actions/actions'
 
 export default function Dealproducts(props) {
     const [products,setProducts]=useState(props.initialdata)
