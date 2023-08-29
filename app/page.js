@@ -9,13 +9,9 @@ import Homeproducts from './components/homepage/Homeproducts';
 import { Button } from '@mui/material';
 import Link from 'next/link';
 
-export async function GetProduct(){
-  const data = await getProducts();
-  return data
-}
 
 export default async function Home() {
-  const data = await GetProduct()
+  const data = await getProducts()
   if(!data){
     return (
       <div className=' text-lg'>No Product Found <Link href='/' color=' text-sky-600 '>!Try again</Link></div>
