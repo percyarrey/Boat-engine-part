@@ -2,6 +2,7 @@ import { COUNTRIES } from "./countries";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 
+import Image from 'next/legacy/image'
 
 export default function CountrySelector({
   id,
@@ -50,7 +51,9 @@ export default function CountrySelector({
           disabled={disabled}
         >
           <span className="truncate flex items-center">
-            <img
+            <Image
+              layout="fill"
+              objectFit="contain"
               alt={`${selectedValue.value}`}
               src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${selectedValue.value}.svg`}
               className={"inline mr-2 h-4 rounded-sm"}
@@ -132,7 +135,9 @@ export default function CountrySelector({
                           onToggle();
                         }}
                       >
-                        <img
+                        <Image
+                          layout="fill"
+                          objectFit="contain"
                           alt={`${value.value}`}
                           src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${value.value}.svg`}
                           className={"inline mr-2 h-4 rounded-sm"}

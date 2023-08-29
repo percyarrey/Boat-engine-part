@@ -4,6 +4,7 @@ import Category from '../components/deals/Category'
 import getDealProduct from '../../services/getDealProducts'
 import Dealproducts from '../components/deals/Dealproducts'
 import { v4 as uuidv4 } from 'uuid'
+import Link from 'next/link'
 export default async function page({searchParams}) {
   const {data} = await getDealProduct(0,searchParams)
   const uuid = uuidv4()
