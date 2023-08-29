@@ -1,5 +1,5 @@
-import Editproduct from '@/app/components/admin/Editproduct'
-import { getDealDetails } from '@/services/getDealDetails'
+import Editproduct from '../../../components/admin/Editproduct'
+import { getDealDetails } from '../../../../services/getDealDetails'
 import React from 'react'
 import { redirect } from 'next/navigation'
 export default async function page({params}) {

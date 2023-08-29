@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
 import Image from 'next/legacy/image'
-import { Button } from '@mui/material'
 import Wishlistbtn from '../deals/wishlistbtn'
 import { BsDot, BsStarFill, BsStarHalf } from 'react-icons/bs'
 

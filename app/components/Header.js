@@ -8,8 +8,8 @@ import {usePathname} from 'next/navigation'
 import { Badge,  IconButton,  Tooltip, Typography } from "@mui/material"
 
 //ICONS
-import {BsArrowBarLeft, BsCart, BsHeart, BsX} from 'react-icons/bs'
-import {AiOutlineUser,AiOutlineHeart} from 'react-icons/ai'
+import {BsArrowBarLeft, BsHeart, BsX} from 'react-icons/bs'
+import {AiOutlineUser} from 'react-icons/ai'
 import {FaUser} from 'react-icons/fa'
 
 //COMPONENT

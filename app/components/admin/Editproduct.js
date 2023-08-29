@@ -4,7 +4,7 @@ import React from 'react'
 
 //REACT SPINNER
 import { MoonLoader } from 'react-spinners'
-import { Box, Button, TextField } from '@mui/material'
+import {Button} from '@mui/material'
 
 
 import Image from 'next/legacy/image'
@@ -12,7 +12,7 @@ import { BsPlus } from 'react-icons/bs'
 import { toast } from 'react-toastify'
 
 
-import ImageCompiling from '@/utils/ImageCompiling'
+import ImageCompiling from '../../../utils/ImageCompiling'
 import axios from 'axios'
 
 function Editproduct(props) {

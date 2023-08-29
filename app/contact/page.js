@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { FaEnvelope, FaMapMarker, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa'
 function Page() {
   return ( 
   <section className="mb-32 text-center">

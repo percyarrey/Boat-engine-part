@@ -1,8 +1,8 @@
 
 import React from 'react'
-import Category from '@/app/components/deals/Category'
-import getDealProduct from '@/services/getDealProducts'
-import Dealproducts from '@/app/components/deals/Dealproducts'
+import Category from '../../components/deals/Category'
+import getDealProduct from '../../../services/getDealProducts'
+import Dealproducts from '../../components/deals/Dealproducts'
 import { v4 as uuidv4 } from 'uuid'
 export default async function page({searchParams}) {
   const {data} = await getDealProduct(0,searchParams)
