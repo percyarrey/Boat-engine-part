@@ -25,13 +25,14 @@ import { addWishlist } from '../../store/wishlistSlice'
 
 //LOGO
 import {logo} from './logo'
+import Localstorage from './header/Localstorage'
 function Header() {
   //REACT REDUX
   const wishlist = useSelector((state)=>state.wishlist.wishlist)
   const dispatch = useDispatch()
   //LOCAL STORAGE
   useEffect(()=>{
-    localStorage()
+    Localstorage()
   },[])
   //SESSION
   const { data, status,loading } = useSession()
