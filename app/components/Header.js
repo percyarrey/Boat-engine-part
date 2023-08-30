@@ -30,13 +30,9 @@ function Header() {
   const wishlist = useSelector((state)=>state.wishlist.wishlist)
   const dispatch = useDispatch()
   //LOCAL STORAGE
-  /* useEffect(()=>{
-    var wishlist =  localStorage?.getItem('wishlist')
-    wishlist = JSON.parse(wishlist)
-    console.log(wishlist)
-    dispatch(addWishlist(wishlist))
-
-  },[]) */
+  useEffect(()=>{
+    localStorage()
+  },[])
   //SESSION
   const { data, status,loading } = useSession()
 
