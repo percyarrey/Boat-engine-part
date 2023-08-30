@@ -44,11 +44,12 @@ export default function AuthProvider({children}) {
     }
   }
   return (
+    <ErrorBoundary>
       <Provider store={store}>
       <SessionProvider>
-    {children}
-          
+          {children}
       </SessionProvider>
     </Provider>
+    </ErrorBoundary>
   )
 }
