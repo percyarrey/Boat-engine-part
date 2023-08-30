@@ -8,6 +8,6 @@ export default function Localstorage(){
         }
     }catch(e){
         console.log(e)
-        return "";
+        return ;
     }
 }
