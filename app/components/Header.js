@@ -32,7 +32,10 @@ function Header() {
   const dispatch = useDispatch()
   //LOCAL STORAGE
   useEffect(()=>{
-    Localstorage()
+    const UserWishlist = Localstorage()
+    if(typeof UserWishlist != 'undefined' && UserWishlist != undefined){
+        dispatch(addWishlist(UserWishlist))
+    }
   },[])
   //SESSION
   const { data, status,loading } = useSession()
