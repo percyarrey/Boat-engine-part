@@ -42,7 +42,7 @@ import { logo } from './logo'
             <h5 className=' font-bold'>Help</h5>
             <div className='mt-1 flex flex-col'>
               <Link className='relative hover:text-[#C34482] hover:top-[0.08rem] hover:left-[0.08rem]' href={'/contact'}>Contact Us</Link>
-              <Link className='relative hover:text-[#C34482] hover:top-[0.08rem] hover:left-[0.08rem]'  href={'/contact'}>Track Orders</Link>
+              <Link className='relative hover:text-[#C34482] hover:top-[0.08rem] hover:left-[0.08rem]'  href={'/trackorder'}>Track Orders</Link>
               <Link className='relative hover:text-[#C34482] hover:top-[0.08rem] hover:left-[0.08rem]'  href={'/contact'}>Feedback</Link>
               <Link className='relative hover:text-[#C34482] hover:top-[0.08rem] hover:left-[0.08rem]'  href={'/contact'}>Security & Fraud</Link>
             </div>

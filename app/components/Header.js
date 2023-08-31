@@ -214,7 +214,10 @@ function Header() {
             </li>
             <li>
               <Link href="/deals" className={isActive('/deals')?"block py-2 pl-3 pr-4 text-gray-900 rounded lg:p-0 dark:text-white font-bold":"block py-2 pl-3 pr-4 hover:font-semibold text-gray-900 rounded lg:p-0 dark:text-white"}>Deals</Link>
-            </li>           
+            </li>    
+            <li>
+              <Link href="/trackorder" className={isActive('/contact')?"block py-2 pl-3 pr-4 text-gray-900 rounded lg:p-0 dark:text-white font-bold":"block py-2 pl-3 pr-4 hover:font-semibold text-gray-900 rounded lg:p-0 dark:text-white"}>Contact Us</Link>
+            </li>       
             <li>
               <Link href="/contact" className={isActive('/contact')?"block py-2 pl-3 pr-4 text-gray-900 rounded lg:p-0 dark:text-white font-bold":"block py-2 pl-3 pr-4 hover:font-semibold text-gray-900 rounded lg:p-0 dark:text-white"}>Contact Us</Link>
             </li>
