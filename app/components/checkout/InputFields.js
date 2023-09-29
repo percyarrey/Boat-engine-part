@@ -6,7 +6,6 @@ import CountrySelector from '../Countries/selector';
 import { COUNTRIES } from "../Countries/countries";
 
 //NEXT AUTH
-import { useSession } from 'next-auth/react';
 import { MoonLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -16,11 +15,13 @@ export default function InputFields(props) {
   const [loading,setLoading]=React.useState(false)
   
   //SESSION
-  const session = useSession()
+  const user = props.user
+
 
   const router = useRouter()
   const [data,setdata]=React.useState({
-      fname:"",
+      fname:user.name,
+      email:user.email,
       country:"",
       num:"",
       pin:"",
@@ -41,16 +42,17 @@ export default function InputFields(props) {
       }
     })
   }
+
   const handleSubmit=async(e)=>{
     e.preventDefault()
-    const {fname,num,pin,house,area,land,town,state,productId,userId,price}=data
+    const {fname,email,num,pin,house,area,land,town,state,productId,userId,price}=data
     e.preventDefault();
     if(loading === false){
-      if(fname&&num&&pin&&house&&area&&land&&town&&state){
+      if(fname&&email&&num&&pin&&house&&area&&land&&town&&state){
         setLoading(true)
         data.country=country
         data.productId=props.data._id
-        data.userId=session.data?.user?.id
+        data.userId=user?.id
         console.log(data)
         await axios.post('/api/crudorder',data)
         .then(res=>{
@@ -132,6 +134,10 @@ export default function InputFields(props) {
             {/*NAME */}
               <div>
                   <input name='fname' type="text" value={data.fname} onChange={handleChange} id="fname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Full name"/>
+              </div>
+              {/*Email*/}
+              <div>
+                  <input name='email' type="email" value={data.email} onChange={handleChange} id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email address"/>
               </div>
             {/*Mobile Number */}
             <div>

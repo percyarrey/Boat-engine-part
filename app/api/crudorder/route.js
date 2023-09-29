@@ -1,12 +1,11 @@
 import connectDB from "../../../utils/connectDB";
 import Order from "../../../models/Order";
-import Images from "../../../models/Images";
 import {NextResponse } from "next/server";
 
 export async function POST(request){
-    var {fname,country,num,pin,house,area,land,town,state,productId,userId,price} = await request.json();
+    var {fname,email,country,num,pin,house,area,land,town,state,productId,userId,price} = await request.json();
     await connectDB()
-    var order = await Order.create({fname,country,num,pin,house,area,land,town,state,productId,userId,price})
+    var order = await Order.create({fname,email,country,num,pin,house,area,land,town,state,productId,userId,price})
     if(order){
       return NextResponse.json({res:true,id:order.OrderId},{status:201})
     }
@@ -14,8 +13,16 @@ export async function POST(request){
 }
 
 export async function PUT(request){
-    
-
+  var {id,status} =  await request.json()
+  if(id){
+    var order = await Order.findOne({OrderId:id})
+    if(order){
+      order.status=status
+      order.save()
+      return NextResponse.json({res:1,id:order.OrderId},{status:201})
+    }
+  }
+  return NextResponse.json({res:0},{status:201})
 }
 
 export async function GET(req){

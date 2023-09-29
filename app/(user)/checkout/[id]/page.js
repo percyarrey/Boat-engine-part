@@ -5,7 +5,14 @@ import InputFields from '../../../components/checkout/InputFields'
 import { BsDot, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import Image from 'next/legacy/image'
 
+
+import { getServerSession } from 'next-auth'
+import { authOptions } from '../../../api/auth/[...nextauth]/route'
+
 export default async function Page({params}) {
+
+  const session = await getServerSession(authOptions)
+
     //CONTROL RATING
     const Stars = (num)=>{
       return Array(num).fill(<BsStarFill color="#0AAC0C" />)
@@ -79,7 +86,7 @@ export default async function Page({params}) {
     </div>
 
     <div className='flex justify-center'>
-      <InputFields data={data}/>
+      <InputFields data={data} user={session.user}/>
     </div>
    </div>
   )
