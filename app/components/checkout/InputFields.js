@@ -1,20 +1,35 @@
 'use client'
 import { Button } from '@mui/material'
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import {useRouter} from 'next/navigation'
 import CountrySelector from '../Countries/selector';
 import { COUNTRIES } from "../Countries/countries";
-export default function InputFields() {
+
+//NEXT AUTH
+import { useSession } from 'next-auth/react';
+import { MoonLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+
+export default function InputFields(props) {
+  //REACT HOOK DECLARATION
+  const [loading,setLoading]=React.useState(false)
+  
+  //SESSION
+  const session = useSession()
+
   const router = useRouter()
   const [data,setdata]=React.useState({
       fname:"",
+      country:"",
       num:"",
       pin:"",
       house:"",
       area:"",
       land:"",
       town:"",
-      state:""
+      state:"",
+      price:props.data.price
   })
   //HANDLE CHANGE
   const handleChange=(e)=>{
@@ -26,16 +41,69 @@ export default function InputFields() {
       }
     })
   }
-  const handleSubmit=(e)=>{
+  const handleSubmit=async(e)=>{
+    e.preventDefault()
+    const {fname,num,pin,house,area,land,town,state,productId,userId,price}=data
     e.preventDefault();
-    router.push('/checkout')
+    if(loading === false){
+      if(fname&&num&&pin&&house&&area&&land&&town&&state){
+        setLoading(true)
+        data.country=country
+        data.productId=props.data._id
+        data.userId=session.data?.user?.id
+        console.log(data)
+        await axios.post('/api/crudorder',data)
+        .then(res=>{
+          res=res.data
+          if(res.res){
+            router.push(`/trackorder/${res.id}`)
+          }else{
+            toast.error('Something went wrong !Try Again', {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+          setLoading(false)
+        })
+        .catch(error=>{
+            toast.error('Something went wrong !Try Again', {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          setLoading(false)
+        })
+      }else{
+        toast.warn('Please fill required Information', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          });
+      }
+    }
   }
 
 
   //SELECTOR
   const [isOpen, setIsOpen] = useState(false);
   // Default this to a country's code to preselect it
-  const [country, setCountry] = useState("US");
+  const [country, setCountry] = useState("United States");
 
   return (
     <div className='pb-6 w-full  max-w-[45rem]  pt-1'>
@@ -56,7 +124,7 @@ export default function InputFields() {
                       open={isOpen}
                       onToggle={() => setIsOpen(!isOpen)}
                       onChange={setCountry}
-                      selectedValue={COUNTRIES.find((option) => option.value === country)}
+                      selectedValue={COUNTRIES.find((option) => option.title === country)}
                     />
                   </div>
                 </div>
@@ -85,18 +153,18 @@ export default function InputFields() {
               <div>
                       <input name='land' type='text' value={data.land} onChange={handleChange} id="land" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Landmark e.g near Susan Hospital"/>
                 </div>
-              {/*Land*/}
+              {/*TOWN*/}
               <div>
                       <input name='town' type='text' value={data.town} onChange={handleChange} id="town" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="City/Town"/>
                 </div>
                 {/*State*/}
                 <div>
-                      <input name='state' type='text' value={data.state} onChange={handleChange} id="state" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter state"/>
+                      <input name='state' type='text' value={data.state} onChange={handleChange} id="state" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter state or province"/>
                 </div>
           </div>
         <div className=' pt-1 flex justify-center'>
           <Button type={'submit'}  style={{width:'100%',textTransform:'none',maxWidth:'20rem',backgroundColor:'#ED6C02'}} variant='contained' color='warning'>
-              Proceed to Checkout
+              {loading ? <div className='w-ful h-full flex justify-center'><MoonLoader color='white' size={20}/></div>:<span>Proceed to Checkout</span>}
           </Button>
         </div>
       </form>

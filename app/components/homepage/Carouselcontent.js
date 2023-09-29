@@ -20,7 +20,7 @@ export default function Carouselcontent(props) {
               </Button>
             </div>
           </div>
-          <Herocard id={props.data._id} productname={props.data.productname} image={props.data?.image?.img1} class={"flex-1 flex justify-center lg:justify-end lg:pr-9"} price={props.data.price} color ={props.btn} discount={props.discount}/>
+          <Herocard id={props.data._id} productname={props.data.productname} image={props.data?.image} class={"flex-1 flex justify-center lg:justify-end lg:pr-9"} price={props.data.price} color ={props.btn} discount={props.discount}/>
         </div>
     </>
   )

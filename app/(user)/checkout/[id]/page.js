@@ -1,7 +1,7 @@
-import { getDealDetails } from '../../../services/getDealDetails'
+import { getDealDetails } from '../../../../services/getDealDetails'
 import React from 'react'
 import {redirect} from 'next/navigation'
-import InputFields from '../../components/checkout/InputFields'
+import InputFields from '../../../components/checkout/InputFields'
 import { BsDot, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import Image from 'next/legacy/image'
 
@@ -50,7 +50,7 @@ export default async function Page({params}) {
     <div className='flex justify-center'>
     <div className='min-h-[9.5rem] max-w-[45rem] w-full flex flex-wrap rounded-md shadow-sm overflow-hidden gap-3 myCard'>
         <h2 className='mytxt w-full font-medium'>Summary</h2>
-        <div className='w-5/12 md:w-3/12  h-[9.5rem] relative bg-black'>
+        <div className='w-5/12 md:w-3/12  h-[10.5rem] relative bg-black'>
             <Image alt='' layout='fill' objectFit='cover' src={data.image.img1}/>
             </div>
             <div className=' flex-1 h-full'>
@@ -64,14 +64,14 @@ export default async function Page({params}) {
             </div>
             <div className='flex justify-between pr-12' style={{color:'#6D6D6D'}}>
               <div>Delivery:</div>
-              <div>$0:00</div>
+              <div>free</div>
             </div>
             <div  style={{fontFamily:'Helvetica, sans-serif,Arial'}} className='font-semibold text-lg flex justify-between pr-12'>
               <div>Order Total:</div>
               <div>${data.price}</div>
             </div>
             <div  style={{fontFamily:'Helvetica, sans-serif,Arial'}} className='font-semibold text-sm text-sky-600 underline flex justify-between pr-12'>
-            <div>Delivery in 2 day</div>
+            <div>Delivery in maximum 7 day</div>
             </div>
           </div>
             </div>

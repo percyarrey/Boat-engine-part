@@ -9,11 +9,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
 import { FiChevronRight,FiChevronLeft} from 'react-icons/fi'
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import{ useSearchParams,useRouter,usePathname} from 'next/navigation';
 
 import { useCallback } from 'react';
+import axios from "axios";
+
+
 export default function Category(props) {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -33,7 +36,6 @@ export default function Category(props) {
     /* BRAND */
   const handleChange = (e) =>{
     if(e.target.value!=e.target.name){
-      console.log(props.searchParams.Sortby !=undefined)
       if(props.searchParams.Sortby !=undefined && e.target.name != 'Sortby'){
         router.push('/deals/')
       }
@@ -48,7 +50,6 @@ export default function Category(props) {
   }
   const handleSlideRight =(e)=>{
     if(sliderRef!=undefined && sliderRef.current!=undefined && sliderRef.current!=null){
-    console.log(sliderRef.current.slideNext())
 
         sliderRef.current.slideNext(1000)
     }
@@ -56,6 +57,27 @@ export default function Category(props) {
   function handleSwiper(swiper){
     sliderRef.current = swiper
   }
+
+  /* GET BRAND */
+  const [brand,setBrand]= useState()
+  useEffect(()=>{
+    (
+      async()=>{
+        var {data} =  await axios.get('/api/crudbrand')
+        .then(res=>{
+          return res
+        })
+        .catch((e)=>{
+          console.log(e)
+          return
+        })
+        data = data.data;
+        if(data){
+          setBrand(data)
+        }
+      }
+    )()
+  })
   return (
     <div className="relative max-h-[95vw] overflow-hidden">
     <div className="swiper-container relative pl-[1.8rem] lg:pl-0">
@@ -93,8 +115,8 @@ export default function Category(props) {
         {/* Sort By */}
         <SwiperSlide style={{maxWidth:'8.1rem',minWidth:'8.1rem'}}>
           <div>
-            <select value={props.searchParams.Sortby} name="Sortby" onChange={handleChange} className="block h-9 bg-[#EBEDED]  w-[7rem] p-2 mb-6 text-sm text-gray-900 border border-gray-300bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full pl-4 placeholder:bg-slate-800" >
-              <option value={'Sortby'} >Sort By</option>
+            <select value={props.searchParams.Sortby} name="Sortby" onChange={handleChange} className="block h-9 bg-[#EBEDED]  w-[7rem] p-2 mb-6 text-sm text-gray-900 border border-gray-.......................300bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full pl-4 placeholder:bg-slate-800" >
+              <option value={''} >Sort By</option>
               <option value="brand">Brand</option>
               <option value="hp">Performance</option>
               <option value="rating">Rating</option>
@@ -106,12 +128,14 @@ export default function Category(props) {
         <SwiperSlide style={{maxWidth:'8.1rem',minWidth:'8.1rem'}}>
           <div className=" flex justify-center">
           <select value={props.searchParams.brand} onChange={handleChange} name="brand" className="block h-9 bg-[#EBEDED] w-[8rem] p-2 mb-6 text-sm text-gray-900 border border-gray-300bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full pl-4" >
-              <option value={'brand'}>Brand</option>
-              <option value="TOHATSU">TOHATSU</option>
-              <option value="SUZUKI">SUZUKI</option>
-              <option value="YAMAHA">YAMAHA</option>
-              <option value="MERCURY">MERCURY</option>
-              <option value="OTHERS">OTHERS</option>
+              <option value={''}>Brand</option>
+              {brand &&
+                brand.map((e,index)=>{
+                  return (
+                      <option value={e.name} key={index}>{e.name}</option>
+                  )
+                })
+              }
           </select>
         </div>
         </SwiperSlide>
@@ -119,7 +143,7 @@ export default function Category(props) {
         <SwiperSlide  style={{maxWidth:'9.1rem',minWidth:'9.1rem'}}>
         <div className=" flex justify-center">
           <select value={props.searchParams.hp} name="hp" onChange={handleChange} className="block h-9 bg-[#EBEDED]  w-[9rem] p-2 mb-6 text-sm text-gray-900 border border-gray-300bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full pl-4 placeholder:bg-slate-800" >
-            <option value={'hp'} >Performance</option>
+            <option value={''} >Performance</option>
             <option value={100} >Less than 100kw</option>
             <option value={200}>Less than 200kw</option>
             <option value={300}>Less than 300kw</option>
@@ -133,7 +157,7 @@ export default function Category(props) {
         <SwiperSlide  style={{maxWidth:'6.1rem',minWidth:'6.1rem'}}>
         <div className=" flex">
           <select name="Rating" value={props.searchParams.Rating} onChange={handleChange} className="block h-9 bg-[#EBEDED]  w-[6rem] p-2 mb-6 text-sm text-gray-900 border border-gray-300bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full pl-4" >
-            <option value="Rating">Rating</option>
+            <option value="">Rating</option>
             <option value="1">1 star</option>
             <option value="2">2 star</option>
             <option value="3">3 star</option>
@@ -147,7 +171,7 @@ export default function Category(props) {
          <SwiperSlide  style={{maxWidth:'9.3rem',minWidth:'9.3rem'}}>
         <div className=" flex">
           <select value={props.searchParams.Price} name="Price" onChange={handleChange} className="block h-9 bg-[#EBEDED]  w-[9.2rem] p-2 mb-6 text-sm text-gray-900 border border-gray-300bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-full pl-4" >
-            <option value={'Price'}>Price</option>
+            <option value={''}>Price</option>
             <option value={10}>Less than 10 $</option>
             <option value={20}>Less than 20 $</option>
             <option value={30}>Less than 30 $</option>

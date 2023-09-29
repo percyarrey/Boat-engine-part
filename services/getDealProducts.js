@@ -1,10 +1,9 @@
 import Products from "../models/Products";
 import connectDB from "../utils/connectDB";
 
-export const getDealProduct = async (page, searchParams) => {
+export const getDealProduct = async (page, searchParams,size = 2) => {
     var data;
     var hasNextPage;
-    const size = 5;
     page = page * size;
     if (page < 0) {
       page = 0;
@@ -18,13 +17,15 @@ export const getDealProduct = async (page, searchParams) => {
     } else {
       const productRegex = new RegExp(searchParams.query, 'i');
       const descriptionRegex = new RegExp(searchParams.query, 'i');
+      /* BRAND */
       const brand = new RegExp(searchParams.brand, 'i');
+
       const hp = Math.floor(searchParams.hp / 0.746) || 10000000000;
       const price = searchParams.Price || 10000000000;
 
       const rating = searchParams.Rating ? { rating: searchParams.Rating } : {};
 
-      const Sortby = searchParams.Sortby
+      const Sortby = searchParams.Sortby || undefined
       data = await Products.find({
         $and: [
           {
@@ -65,16 +66,6 @@ export const getDealProduct = async (page, searchParams) => {
       }).limit(1).sort({ [Sortby]: -1 }).skip(page + size).countDocuments()) > 0;
       
     }
-
-    /* const res = await fetch(`${process.env.BACKEND_URI}crudproduct`, {
-      method: "GET",
-      cache: "force-cache",
-    });
-    const { data } = await res.json(); */
-    data = data.map((e,index)=>{
-      e.image={img1:e.image.img1}
-        return e
-    })
     return { data: JSON.parse(JSON.stringify(data)), npage: hasNextPage };
 
 };

@@ -1,80 +1,88 @@
-import Herovideo from './components/homepage/Herovideo';
-import Carousel from "./components/homepage/Carousel";
+'use client'
+import { useState, useEffect, useRef } from 'react';
+/* HOMESECTIONS */
 
-import Slider from "./components/homepage/Slider";
-import Discount from './components/homepage/Discount';
-import Trending from './components/homepage/Trending';
-import  getProducts  from '../services/getProducts';
-import Homeproducts from './components/homepage/Homeproducts';
-import { Button } from '@mui/material';
-import Link from 'next/link';
+/* DYNAMIC */
+import dynamic from 'next/dynamic'
+const Hero = dynamic(() => import('./components/homesections/Hero'));
+const HeroCarts = dynamic(() => import('./components/homesections/HeroCarts'));
+const Discount = dynamic(() => import('./components/homesections/Discount'));
+const BrandCarts = dynamic(() => import('./components/homesections/BrandCarts'));
+const Trending = dynamic(() => import('./components/homesections/Trending'));
+const ExtraProduct = dynamic(() => import('./components/homesections/ExtraProduct'));
 
-export default async function Home() {
-  const data = await getProducts()
-  if(!data){
-    return (
-      <div className=' text-lg'>No Product Found <Link href='/' color=' text-sky-600 '>!Try again</Link></div>
-    )
+export default function Home() {
+  const [component1Loaded, setComponent1Loaded] = useState(false);
+  const [component2Loaded, setComponent2Loaded] = useState(false);
+  const [component3Loaded, setComponent3Loaded] = useState(false);
+  const [component4Loaded, setComponent4Loaded] = useState(false);
+  const [component5Loaded, setComponent5Loaded] = useState(false);
+  const [component6Loaded, setComponent6Loaded] = useState(false);
+  useEffect(() => {
+    setComponent1Loaded(true);
+  }, []);
+
+  const handleComponent2 = ()=>{
+    setComponent2Loaded(true);
   }
-  const slider1 = data.slice(3,7)
-  const slider2 = data.slice(7,11)
+  const handleComponent3 = ()=>{
+    setComponent3Loaded(true);
+  }
+
+  const handleComponent4 = ()=>{
+    setComponent4Loaded(true);
+  }
+
+  const handleComponent5 = ()=>{
+    setComponent5Loaded(true);
+  }
+
+  const handleComponent6 = ()=>{
+    setComponent6Loaded(true);
+  }
+
+
+  const VideoRef = useRef(null)
+  const LoadVideo = ()=>{
+    if(VideoRef){
+      if(VideoRef.current){
+        VideoRef.current()
+      }
+    }
+  }
+
   return (
     <main>
       {/* HERO */}
-      <section id="hero" className="overflow-hidden w-full ">
-          <Herovideo/>
-        <div className="h-full">
-          <Carousel data = {data}/>
-        </div>
-      </section>
-  <div className=" relative top-[-0.2rem]  bg-white">
+      {component1Loaded && <Hero VideoRef={VideoRef} handle={handleComponent2}/>}
+      <div className=" relative top-[-0.2rem]  bg-white">
       {/* HERO CARTS */}
-      <section className="pt-6 pb-4">
-        <h5 className="mytxt font-bold text-2xl">Best Selling Boats Engine</h5>
-
-        <div className="pt-3">
-          <Slider  data={slider1}/>
-        </div>
-      </section>
+      {component2Loaded && <HeroCarts  handle={handleComponent3}/>}
       {/* DISCOUNT */}
-      <section className=' bg-[#8FCBE3]'>
-        <Discount/>
-      </section>
+      {component3Loaded && <Discount  handle={handleComponent4}/>}
       {/* BRANDS CARTS */}
-      <section className="pt-6 pb-4">
-        <h5 className="mytxt font-bold text-2xl">{"Engine's"} From Top Brand</h5>
-        <div className="pt-3">
-          <Slider data={slider2}/>
-        </div>
-      </section>
+      {component4Loaded && <BrandCarts  handle={handleComponent5}/>}
 
       {/* TRENDING PRODUCTS */}
-      <section>
-        <h5 className="mytxt font-bold text-2xl">Trending Products For You</h5>
-          <Trending/>
-      </section>
+      {component5Loaded && <Trending  handle={handleComponent6}/>}
       
       {/* Extra Products */}
-      <h5 className="mytxt mt-4 pl-1 font-bold text-2xl">All Products</h5>
-      <section className='flex px-2 justify-center'>
-        <div className=' w-full grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-          <Homeproducts/>
+      {component6Loaded ? 
+        <ExtraProduct handle={LoadVideo}/>:
+        <div  style={{display:'flex',minHeight:'50vh',justifyContent:'center',alignItems:'center',flexDirection:'column'}} >
+        <div className='h-8 w-8 inline-block rounded-full border-4 border-r-gray-800 border-solid animate-spin' role='status'>
         </div>
-      </section>
-      <section className='flex justify-center'>
-        <Link href='/deals'  style={{maxWidth:'25rem',width:'100%',marginTop:'1rem'}}>
-          <Button style={{width:'100%'}} variant='outlined' color='success'>
-            <span>Show More</span>
-          </Button>
-        </Link>
-      </section>
+    </div>
+      }
+
+
       {/* HIDING */}
       <section className='h-0'>
         <div className='h-[1rem] bg-white'>
         
         </div>
       </section>
-</div>
+  </div>
       
     </main>
   )

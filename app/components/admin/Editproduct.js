@@ -16,6 +16,7 @@ import ImageCompiling from '../../../utils/ImageCompiling'
 import axios from 'axios'
 
 function Editproduct(props) {
+  var brand=props.brand
   props=props.data
   //REACT HOOK DECLARATION
   const [loading,setLoading]=React.useState(false)
@@ -110,7 +111,6 @@ function Editproduct(props) {
                   theme: "light",
                   });
                 }else{
-                  console.log(res.message)
                   toast.error('Something went wrong !Try Again', {
                     position: "top-center",
                     autoClose: 2000,
@@ -279,19 +279,21 @@ return (
             </div>
             {/* PRODUCT NAME */}
               <div>
-                  <label htmlFor="productname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
+                  <label htmlFor="productname" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name (<small className=' font-semibold'>unique</small>)</label>
                   <input name='productname' type="text" value={data.productname} onChange={handleChange} id="productname" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Engine"/>
               </div>
               {/* BRAND */}
               <div>   
                   <label htmlFor="brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">brand</label>
                   <select id="brand" value={data.brand} onChange={handleChange} name='brand' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option defaultValue={''}>Choose a brand</option>
-                    <option value="TOHATSU">TOHATSU</option>
-                    <option value="SUZUKI">SUZUKI</option>
-                    <option value="YAMAHA">YAMAHA</option>
-                    <option value="MERCURY">MERCURY</option>
-                    <option value="OTHERS">OTHERS</option>
+                  <option defaultValue={''}>Choose a brand</option>
+                    {brand &&
+                      brand.map((e,index)=>{
+                        return (
+                            <option value={e.name} key={index}>{e.name}</option>
+                        )
+                      })
+                    }
                   </select>
               </div>
               {/* YEAR */}

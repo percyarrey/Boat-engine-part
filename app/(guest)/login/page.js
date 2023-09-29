@@ -61,7 +61,6 @@ export default function Page() {
               redirect:false
             })
             .then(res=>{
-              console.log(res)
               if(res.error===null){
                 toast.success('Login Successfull', {
                 position: "top-center",

@@ -166,7 +166,7 @@ export default function Card(props) {
     
   <div onClick={handleClick} className="w-full  max-w-[360px] relative bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 myCard cursor-pointer h-full">
         <div className='rounded-lg relative overflow-hidden bg-[#F5F6F6]' style={{width:'100%',height:'14rem'}}>
-            <Image className="rounded-t-lg" src={props.image.img1} alt={props.productname} layout='fill'  objectFit='cover'/>
+            <Image className="rounded-t-lg" src={props.image} alt={props.productname} layout='fill'  objectFit='cover'/>
             <div className='flex justify-end'>
                 <Tooltip title='Wishlist' className=' ' >
                 <IconButton size="large" aria-label="wishlist" name='wishlist'  color="inherit">
@@ -208,8 +208,11 @@ export default function Card(props) {
           </div>
           <div name='actions' className='flex justify-between mt-auto'>
           {
-            !isActive('/dashboard')?
-                <Button  onClick={()=>{router.push('/checkout/'+props._id)}} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',backgroundColor:'#066E4C',color:'white',marginTop:'0.5rem',marginBottom:'0.5rem'}}>Place an Order</Button>
+            !isActive('/customize')?
+                <>
+                    <Button  onClick={()=>{router.push('/checkout/'+props._id)}} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',backgroundColor:'#066E4C',color:'white',marginTop:'0.5rem',marginBottom:'0.5rem'}}>Place an Order</Button>
+                    <Button variant='outlined' onClick={()=>{router.push('/deals/'+props._id)}} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',color:'#066E4C',marginTop:'0.5rem',marginBottom:'0.5rem'}}>View Details</Button>
+                </>
             :
                 <>
                 <Button onClick={()=>{router.push('/manageproduct/'+props._id)}} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',backgroundColor:'#066E4C',color:'white',marginTop:'0.5rem',marginBottom:'0.5rem'}}>Edit</Button>

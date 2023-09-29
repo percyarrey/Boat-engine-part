@@ -7,14 +7,14 @@ import { fetchDealProducts } from '../../../server actions/actions'
 
 export default function Dealproducts(props) {
     const [products,setProducts]=useState(props.initialdata)
-    const [page,setPage] = useState(1)
+    const [page,setPage] = useState(2)
     const [ref,inView] = useInView()
     const [Npage,setNpage] = useState(true)
     useEffect(()=>{
         if(inView){
             (
                 async()=>{
-                    if(Npage==true){
+                    if(Npage){
                       const {data,npage} = await fetchDealProducts(page,props.searchParams)
                       setPage(prev=>{
                         const num = prev + 1
@@ -24,10 +24,8 @@ export default function Dealproducts(props) {
                         ...prev,
                         ...data
                       ])
-                      if(npage==false){
-                        setTimeout(() => {
-                          setNpage(false)
-                        }, 1000);
+                      if(!npage){
+                        setNpage(false)
                       }
                     }
                 }

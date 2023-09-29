@@ -1,11 +1,15 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button } from '@mui/material'
 import {useRouter} from 'next/navigation'
-export default function Discount() {
-  const router = useRouter()
+export default function Discount(props) {
+    useEffect(()=>{
+      props.handle()
+    },[])
+    const router = useRouter()
   return (
-    <div className='flex scale-image justify-end items-center  min-h-[50vh] overflow-hidden sm:px-[1rem] lg:px-[7rem] scale-image lg:h-[50vh] text-white'>
+    <section className=' bg-[#8FCBE3]'>
+        <div className='flex scale-image justify-end items-center  min-h-[50vh] overflow-hidden sm:px-[1rem] lg:px-[7rem] scale-image lg:h-[50vh] text-white'>
           <div className='mybg p-6  max-w-[368px] z-10'>
               <h6 className='text-2xl font-bold'>Get 5% Cash Back On $200</h6>
               <p>Shopping is a bit of a relaxing hobby for me, which is sometimes troubling for the bank balance.</p>
@@ -14,5 +18,6 @@ export default function Discount() {
               </Button>
         </div>
       </div>
+    </section>
   )
 }

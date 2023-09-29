@@ -5,7 +5,13 @@ import React from 'react'
 import {usePathname} from 'next/navigation'
 import { BsQuestionCircle } from 'react-icons/bs'
 import { logo } from './logo'
+
+
+//NEXT AUTH
+import { signOut, useSession } from 'next-auth/react';
  function Footer() {
+  //SESSION
+  const { data, status,loading } = useSession()
   //NAVIGATION
   const pathname =usePathname()
   const isActive = (path) =>{
@@ -15,41 +21,75 @@ import { logo } from './logo'
     return null
   }
    return (
-     <div className=' bg-zinc-50 relative w-full'>
-        <div className='flex flex-wrap px-1 lg:px-6'>
-          <div className='w-6/12 md:w-3/12 h-full'>
-            <Link href='/' className="flex items-center">
-                <Image  src={logo}
-            height={60} width={60} alt="Creativepart"/>
-                <span className="self-center  hidden  sm:flex text-2xl font-bold  whitespace-nowrap mytxt">{"CreativePart's"}</span>
-            </Link>
-            <p className=' text-sm'>
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-            </p>
-            <h5 className=' font-semibold mt-1'>Accepted Payments</h5>
-            <div className='relative h-7'>
-              <Image src="/stripe.png"
-                layout='fill' objectFit='contain' alt="Creativepart"/>
-            </div>
+     <div className=' bg-zinc-50 relative w-full mt-2'>
+    <footer className="bg-gray-100 container px-2 lg:px-8">
+      <div>
+          <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4">
+              <div className="col-span-1">
+                  <div className="flex items-center">
+                      <Link className="navbar-brand flex items-center" href="/">
+                      <Image  src={logo}
+              height={50} width={50} alt="Creativepart"/>
+                          <span className="ml-2 text-green-500 text-2xl font-semibold">Creative {}{"Part's"}</span>
+                      </Link>
+                  </div>
+                  <div className="mt-4 flex flex-col gap-2">
+                      <p><strong>ADDRESS:</strong> Cameroon, Buea, Molyko</p>
+                      <p><strong>TELEPHONE:</strong> +237 6737845</p>
+                      <p><strong>EMAIL:</strong> Email@gmail.com</p>
+                  </div>
+              </div>
+              <div className="col-span-1">
+                          <div className="mt-4">
+                              <h3 className="font-bold">Menu</h3>
+                              <ul>
+                                  <li><Link href="/">Home</Link></li>
+                                  <li><Link href="/deals">Products</Link></li>
+                                  <li><Link href="/trackorder">Track Orders</Link></li>
+                                  <li><Link href="/contact">Contact</Link></li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div className="col-span-1">
+                          <div className="mt-4">
+                              <h3 className="font-bold">Account</h3>
+                              <ul>
+                                {
+                                  status !== 'authenticated'?
+                                      <>
+                                        <li><Link href="/login">Login</Link></li>
+                                        <li><Link href="/register">Register</Link></li>
+                                      </>
+                                  :
+                                      <li><Link href="/profile">Profile</Link></li>
+                                }
+                                  <li><Link href="/cart">Checkout</Link></li>
+                              </ul>
+                          </div>
+                      </div>
+              <div className="col-span-1">
+                <div className="mt-6">
+                    <div className="mt-4">
+                        <h3 className="font-bold">Newsletter</h3>
+                        <div className="mt-2">
+                            <p>Subscribe to our newsletter and get updates daily.</p>
+                        </div>
+                        <div className="mt-4">
+                            <form>
+                                <div className="flex items-center">
+                                    <input required type="email" name="email" id="email" placeholder="Enter Your Mail" className="bg-white border border-gray-300 rounded-l-md focus:ring-green-500 focus:border-green-500 block w-full py-2 px-4 sm:text-sm" />
+                                    <input type="submit" value="Subscribe" className="bg-green-500 text-white px-4 py-2 rounded-r-md cursor-pointer" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+              </div>
           </div>
-          <div className='w-6/12 md:w-3/12 h-full'>
-            <h5 className=' font-bold'>About Us</h5>
-          </div>
-          <div className='w-6/12 md:w-3/12 h-full'>
-            <h5 className=' font-bold'>Contact Us</h5>
-          </div>
-          <div className='w-6/12 md:w-3/12 h-full'>
-            <h5 className=' font-bold'>Help</h5>
-            <div className='mt-1 flex flex-col'>
-              <Link className='relative hover:text-[#C34482] hover:top-[0.08rem] hover:left-[0.08rem]' href={'/contact'}>Contact Us</Link>
-              <Link className='relative hover:text-[#C34482] hover:top-[0.08rem] hover:left-[0.08rem]'  href={'/trackorder'}>Track Orders</Link>
-              <Link className='relative hover:text-[#C34482] hover:top-[0.08rem] hover:left-[0.08rem]'  href={'/contact'}>Feedback</Link>
-              <Link className='relative hover:text-[#C34482] hover:top-[0.08rem] hover:left-[0.08rem]'  href={'/contact'}>Security & Fraud</Link>
-            </div>
-          </div>
-        </div>
-        <hr/>
-        <div className=' px-1 lg:px-6 flex flex-wrap justify-between gap-x-4'>
+      </div>
+    </footer>
+        <hr className='mt-2'/>
+        <div className=' container px-2 pb-1 lg:px-8 flex flex-wrap justify-between gap-x-4'>
           <div className='flex gap-1 items-center'>
             <BsQuestionCircle color='#C34482' fontSize={21}/>
             <Link className=' hover:text-[#C34482]' href={"/contact"}>Help Center</Link>
@@ -60,10 +100,9 @@ import { logo } from './logo'
           <div className='flex gap-1 items-center'>
             <Link className=' hover:text-[#C34482]' href={"/contact"}>Privacy and Security</Link>
           </div>
-          <div>
-            &copy;Copyright 2023. All Right reserved by &nbsp; <Link href={'/'}><b className=' mytxt'>Creative {"Part's"}</b></Link>
-          </div>
       </div>
+      
+      <div className="text-center pb-2 text-green-500 text-sm">Copyright &copy; 2023. All rights reserved by Creative {"Part's"}.</div>
      </div>
    )
  }

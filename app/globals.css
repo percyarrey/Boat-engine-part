@@ -71,3 +71,13 @@ body{
 .scale-image:hover::before {
   transform: scale(1.15);
 }
+
+
+footer  a{
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+footer  a:hover{
+  color: #C34482;
+}

@@ -15,19 +15,20 @@ export default function HeaderToggler() {
   useEffect(()=>{
     if(Topheader?.current!==null){
       if(window.scrollY>0){
-        Topheader.current.style.height='0rem'
         Topheader.current.classList.add('hidden')
+      }else{
+        Topheader.current.classList.remove('hidden')
+        Topheader.current.classList.add('flex')
       }
     }
     window.addEventListener('scroll',(e)=>{
       if(Topheader?.current!==null){
         if(window.scrollY>0){
           Topheader.current.classList.add('hidden')
-          Topheader.current.style.height='0rem'
 
         }else{
           Topheader.current.classList.remove('hidden')
-          Topheader.current.style.height='fit-content'
+          Topheader.current.classList.add('flex')
         }
       }
     })
@@ -38,7 +39,7 @@ export default function HeaderToggler() {
   }
   return (
     <>
-        <div ref={Topheader} className="mybg py-1 flex items-center sm:gap-3 justify-center sm:justify-between flex-wrap lg:px-8 px-2  pr-5 overflow-hidden">
+        <div ref={Topheader} className="mybg py-1 items-center sm:gap-3 justify-center sm:justify-between flex-wrap lg:px-8 px-2  pr-5 overflow-hidden hidden">
             <div className="flex">
                 <div className="flex items-center mt-1"><BsTelephone color="white"/></div>
                 <div className=" text-white text-sm"> +237674751815</div>

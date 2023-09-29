@@ -1,11 +1,15 @@
+import React, { useEffect } from 'react'
 import { Button } from '@mui/material'
 import Image from 'next/legacy/image'
 import Link from 'next/link'
-import React from 'react'
-
-export default function Trending() {
+export default function Trending(props) {
+    useEffect(()=>{
+        props.handle()
+    },[])
   return (
-    <div className='flex mt-2 gap-1 sm:gap-6 justify-between px-3'>
+    <section>
+        <h5 className="mytxt font-bold text-2xl">Trending Products For You</h5>
+        <div className='flex mt-2 gap-1 sm:gap-6 justify-between px-3'>
         <div className='bg-[#e8ededba] w-full sm:w-6/12 rounded-xl shadow-md overflow-hidden'>
             <Link href={'/deals'}>  
                 <div className='relative bg-[#e8eded] h-[8rem]  md:h-[16rem]'>
@@ -39,6 +43,6 @@ export default function Trending() {
             </Link>   
         </div>
     </div>
-    
+    </section>
   )
 }

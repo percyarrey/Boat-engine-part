@@ -21,6 +21,8 @@
     "eslint-config-next": "13.4.10",
     "flowbite": "^1.7.0",
     "framer-motion": "^10.16.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "mongoose": "^7.3.4",
     "next": "13.4.10",
     "next-auth": "^4.22.3",

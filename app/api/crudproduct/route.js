@@ -1,24 +1,44 @@
 import connectDB from "../../../utils/connectDB";
 import Products from "../../../models/Products";
+import Images from "../../../models/Images";
 import {NextResponse } from "next/server";
 
 export async function POST(request){
-    const {productname,brand,image,year,hp,price,rating,description} = await request.json();
+    var {productname,brand,image,year,hp,price,rating,description} = await request.json();
     await connectDB()
     const result = await Products.findOne({productname:productname})
     if(result){
         return NextResponse.json({message:"Product already exist"},{status:201})
     }else{
-        Products.create({productname,brand,image,year,hp,rating,price,description})
+        var img = image
+        image=image.img1
+        var product = await Products.create({productname,brand,image,year,hp,rating,price,description})
+        /* IMAGES */
+        Images.create({
+          productId:product._id,
+          img2:img.img2,
+          img3:img.img3,
+          img4:img.img4,
+        })
         return NextResponse.json({message:"Product created Succesfully",data:result},{status:201})
     }
 }
 
 export async function PUT(request){
-    const {id,productname,brand,image,year,hp,price,rating,description} = await request.json();
+    var {id,productname,brand,image,year,hp,price,rating,description} = await request.json();
     await connectDB()
     const product = await Products.findOne({_id:id})
     if (product) {
+      var img = image
+      image=image.img1
+      //Update product
+      const imageObject = await Images.findOne({productId:product._id})
+      if(imageObject){
+        imageObject.img2=img.img2;
+        imageObject.img3=img.img3;
+        imageObject.img4=img.img4;
+        await imageObject.save()
+      }
       // Update the properties of the product object
       product.productname = productname;
       product.brand = brand;
@@ -43,29 +63,7 @@ export async function PUT(request){
 }
 
 export async function GET(req){
-    const { searchParams } = new URL(req.url);
-    var query = searchParams.get("query");
-    /* var prop = query?.slice(0,1);
-    query  = query?.slice(2,query.length); */
-    await connectDB()
-    var data;
-   /*  if(prop==='s'){
-      data = await Products.find({productname:{$regex:query,$options:'i'}})
-      if(!data){
-        return NextResponse.json({data:'Nothing found'},{status:201})
-      }
-    }else if(prop==='c'){
-      data = await Products.find({brand:{$regex:query,$options:'i'}})
 
-      if(!data){
-        return NextResponse.json({data:'Nothing found'},{status:201})
-      }
-    }else{ */
-    data = await Products.find({}).limit(20);
-    /* } */
-    return NextResponse.json({data:data},{status:201})
-
-    
 }
 
 export async function DELETE(req){
@@ -76,7 +74,7 @@ export async function DELETE(req){
   if (product) {
     // Delete the Product
     const res = await Products.deleteOne({_id:product._id})
-    console.log(res)
+    await Images.deleteOne({productId:product._id})
     // run check
     if(res){
       return NextResponse.json({message: 'Product Deleted Successfully'},{status:201})

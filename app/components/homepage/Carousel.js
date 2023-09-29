@@ -10,7 +10,6 @@ import 'swiper/css/pagination';
 // import required modules
 import { Pagination,Autoplay } from 'swiper';
 import Carouselcontent from './Carouselcontent';
-import { useEffect } from 'react';
 
 export default function Carousel(props) {
 
@@ -27,7 +26,7 @@ export default function Carousel(props) {
         }}
         loop={true}
         speed={3000}
-        className="mySwiper h-full min-h-[55vh]"
+        className="mySwiper h-[55vh] min-h-[15rem]"
       >
         <SwiperSlide>
           <Carouselcontent color='bg-[#182e2ee5]' btn='#016343' discount={50} data={props.data[0]}/>
