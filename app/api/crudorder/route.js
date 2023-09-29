@@ -22,9 +22,9 @@ export async function GET(req){
   const { searchParams } = new URL(req.url);
   var id = searchParams.get("id");
   if(id){
-    var order = Order.findOne({OrderId:id})
+    var order = await Order.findOne({OrderId:id})
     if(order){
-      return NextResponse.json({message:1,id:order._id},{status:201})
+      return NextResponse.json({message:1,id:order.OrderId},{status:201})
     }
   }
   return NextResponse.json({message:0},{status:201})

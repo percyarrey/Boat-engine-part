@@ -35,7 +35,7 @@ export default function Brandcomp(props) {
                         });
                         setTimeout(() => {
                             router.refresh()
-                        }, 1990);
+                        }, 500);
                     }else{
                         toast.warn('Failed to delete Brand', {
                         position: "top-center",
@@ -88,7 +88,7 @@ export default function Brandcomp(props) {
                 });
                 setTimeout(() => {
                     router.refresh()
-                }, 1090);
+                }, 500);
             }else{
                 toast.warn('Failed to add Brand', {
                 position: "top-center",

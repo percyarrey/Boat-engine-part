@@ -20,7 +20,6 @@ export default function Page() {
       axios.get(`/api/crudorder?id=${data}`)
       .then(res=>{
         res=res.data
-        console.log(res)
         if(res.message===1){
           router.push(`/trackorder/${res.id}`)
         }else{

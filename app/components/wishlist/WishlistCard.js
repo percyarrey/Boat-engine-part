@@ -54,8 +54,8 @@ export default function WishlistCard(props) {
   return (
     <>
       <div className='min-h-[9rem] max-w-[45rem] w-full flex rounded-md shadow-sm overflow-hidden gap-3 myCard' onClick={handleClick}>
-        <div className='w-5/12 md:w-3/12  h-[9rem] relative bg-black'>
-            <Image alt='' layout='fill' objectFit='cover' src={data.image.img1}/>
+        <div className='w-5/12 md:w-3/12  h-[9rem] relative'>
+            <Image alt={data.productname} layout='fill' objectFit='cover' src={data.image}/>
         </div>
         <div className=' flex-1 h-full'>
           {/* DETAILS */}
