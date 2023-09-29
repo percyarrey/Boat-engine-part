@@ -38,7 +38,7 @@ export default function Brand(props) {
             });
             setTimeout(() => {
                 router.refresh()
-            }, 1990);
+            }, 500);
           }else if(res.message===0){
             toast.warn('Brand already Exist', {
               position: "top-center",
