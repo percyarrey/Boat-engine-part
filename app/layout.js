@@ -28,8 +28,8 @@ export default function RootLayout({ children }) {
   
 return (
     <AuthProvider>
-        <html lang="en">
-      <body className='flex justify-between flex-col w-[100vw] overflow-x-hidden min-h-[100vh]'>
+    <html lang="en">
+      <body className='flex justify-between flex-col w-[100vw] overflow-x-hidden min-h-[100vh] '>
         <div>
           
           {/* REACT TOAST */}

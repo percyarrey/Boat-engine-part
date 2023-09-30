@@ -26,6 +26,9 @@ export const getOrder = async(id,type=0,page=0)=>{
             var npage = await Order.find({}).limit(5).sort({new:-1}).skip(page+5).countDocuments()>0
             return {order:JSON.parse(JSON.stringify(order)),npage:npage}
         }
+        if(type===4){
+            var order = await Order.find({userId:id});
+        }
         return JSON.parse(JSON.stringify(order))
     }catch(e){
         console.log(e)

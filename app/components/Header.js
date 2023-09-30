@@ -157,6 +157,9 @@ function Header() {
                         <Link href="/wishlist" className="flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Wishlist <div className=' text-white rounded-full bg-red-900 px-2'>{wishlist.length}</div></Link>
                       </li>
                       <li>
+                        <Link href="/recentorders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Recent orders</Link>
+                      </li>
+                      <li>
                         <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</Link>
                       </li>
                       <li>
