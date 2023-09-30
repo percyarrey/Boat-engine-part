@@ -54,7 +54,7 @@ const OrderCard = ({ order }) => {
   }
 
   return (
-    <div className="mb-3 w-full max-w-[45rem] min-h-[14rem] border border-gray-300 rounded-md bg-slate-100 shadow-sm">
+    <div className="mb-3 w-full max-w-[45rem] min-h-[15.4rem] border border-gray-300 rounded-md bg-slate-100 shadow-sm">
       <div className="card-header flex justify-between px-3 py-1">
         <h5 className=" text-lg font-semibold">Order <span className='font-bold text-[#0E9F6E]'>#{order.OrderId}</span></h5>
         {order.new === 1 && (
@@ -63,7 +63,7 @@ const OrderCard = ({ order }) => {
           </div>
         )}
       </div>
-      <hr className='my-2 px-3 py-2'/>
+      <hr className='my-2 px-6 py-2'/>
       <div className="card-body">
         <p className=" capitalize">Customer: {order.fname}</p>
         <p className="card-text">Email: {order.email}</p>
