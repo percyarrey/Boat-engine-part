@@ -22,7 +22,7 @@ import { signOut, useSession } from 'next-auth/react';
   }
    return (
      <div className=' bg-zinc-50 relative w-full mt-2'>
-    <footer className="bg-gray-100 container px-2 lg:px-8">
+    <footer className="container px-2 lg:px-8">
       <div>
           <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4">
               <div className="col-span-1">
