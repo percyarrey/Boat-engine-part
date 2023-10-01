@@ -3,7 +3,6 @@
 import { NextResponse } from 'next/server';
 import {sendEmail} from '../../../utils/sendgrid';
 
-import sgMail from '@sendgrid/mail';
 
 // Example usage in an API route sendEmailAPI
 export async function GET() {
