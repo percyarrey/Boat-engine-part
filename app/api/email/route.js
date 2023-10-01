@@ -7,7 +7,7 @@ import {sendEmail} from '../../../utils/sendgrid';
 // Example usage in an API route sendEmailAPI
 export async function GET() {
   
-  const email = 'jeol12369@gmail.com'
+  const email = process.env.EMAIL
     try {
       await sendEmail(email, 'Test Email', 'This is a test email from Next.js!');
       return NextResponse.json({message:"Email sent Succesffully"},{status:201})
