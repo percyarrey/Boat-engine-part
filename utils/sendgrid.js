@@ -5,7 +5,7 @@ export const sendEmail = async (to, subject, text) => {
 
   const msg = {
     to,
-    from: process.env.EMAIL,
+    from: process.env.email,
     subject,
     text,
   };
@@ -14,6 +14,8 @@ export const sendEmail = async (to, subject, text) => {
     await sgMail.send(msg);
     console.log(`Email sent to ${to}`);
   } catch (error) {
-    console.error(error);
+    /* console.error(error); */
+    var e = await error
+    console.log(e)
   }
 };
