@@ -5,7 +5,7 @@ import {sendEmail} from '../../../utils/sendgrid';
 
 
 // Example usage in an API route sendEmailAPI
-export async function GET() {
+export async function POST() {
   
   const email = "tanyitikuarrey@gmail.com"
     try {

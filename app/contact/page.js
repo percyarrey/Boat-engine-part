@@ -5,7 +5,7 @@ import React from 'react'
 function Page() {
   const handleEmail=(e)=>{
     e.preventDefault()
-    axios.get('/api/email')
+    axios.post('/api/email')
     .then(res=>{
       res=res.data
       console.log(res.message)
