@@ -41,7 +41,9 @@ export const authOptions={
             throw Error('Email Already Exist')
           }
           user = await UserModel.create({email,name, password})
-          const msg = {
+
+          //CLIENT WELCOME
+          var msg = {
             to:email,
             from:process.env.email,
             template_id: 'd-33e94435061d46619928402f0498b865',
@@ -54,6 +56,23 @@ export const authOptions={
           } catch (error) {
             console.error(error);
           }
+
+
+          //ADMIN WELCOME
+          msg = {
+            to:process.env.email,
+            from:email,
+            template_id: 'd-06c6a9444dae453a97d6c33436d96216',
+            dynamic_template_data: {
+              email: email,
+            },
+          };
+          try {
+            await sendEmail(msg);
+          } catch (error) {
+            console.error(error);
+          }
+
         }
         if(action==='login'){
           if(!user) throw Error('Wrong Username and Password')
@@ -84,12 +103,29 @@ export const authOptions={
         var pwd = generatePassword()
         if(!user){
           user = await UserModel.create({email,name,pwd})
-          const msg = {
+
+          //CLENT WELCOME
+          var msg = {
             to:email,
             from:process.env.email,
             template_id: 'd-33e94435061d46619928402f0498b865',
             dynamic_template_data: {
               name: name,
+            },
+          };
+          try {
+            await sendEmail(msg);
+          } catch (error) {
+            console.error(error);
+          }
+
+          //ADMIN WELCOME
+          msg = {
+            to:process.env.email,
+            from:email,
+            template_id: 'd-06c6a9444dae453a97d6c33436d96216',
+            dynamic_template_data: {
+              email: email,
             },
           };
           try {

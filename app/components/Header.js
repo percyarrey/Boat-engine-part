@@ -11,6 +11,8 @@ import { Badge,  IconButton,  Tooltip, Typography } from "@mui/material"
 import {BsArrowBarLeft, BsHeart, BsX} from 'react-icons/bs'
 import {AiOutlineUser} from 'react-icons/ai'
 import {FaUser} from 'react-icons/fa'
+import { FaUserPlus } from 'react-icons/fa';
+import { FaSignInAlt } from 'react-icons/fa';
 
 //COMPONENT
 import SearchBar from "./header/SearchBar"
@@ -171,11 +173,17 @@ function Header() {
                   <div className="px-0 py-3">
                     <ul className="py-0" aria-labelledby="user-menu-button">
                     <li>
-                        <Link href="/login" className="block min-w-[8rem] text-center px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-md dark:text-gray-200 dark:hover:text-white">Login</Link>
+                        <Link href="/login" className="min-w-[8rem] px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-md dark:text-gray-200 dark:hover:text-white flex gap-5">
+                          <FaSignInAlt className="mr-2 mt-1" />
+                          Login
+                        </Link>
                       </li>
                       <hr/>
                       <li>
-                            <Link href="/signup" className="block px-4 py-2  text-center text-md w-full text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign Up</Link>
+                        <Link href="/signup" className="flex gap-4 px-4 py-2 text-md w-full text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                          <FaUserPlus className="mr-2 mt-1" />
+                          Sign Up
+                        </Link>
                       </li>
                       </ul>
                   </div>
