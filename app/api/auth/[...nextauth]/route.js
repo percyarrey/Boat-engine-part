@@ -8,6 +8,18 @@ import  GoogleProvider  from "next-auth/providers/google";
 //EMAIL
 import {sendEmail} from '../../../../utils/sendgrid'
 
+function generatePassword(length = 8) {
+  const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let password = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * charset.length);
+    password += charset.charAt(randomIndex);
+  }
+
+  return password;
+}
+
 export const authOptions={
   session:{
     strategy:'jwt',
@@ -69,8 +81,9 @@ export const authOptions={
         const name = profile.name
         const email = profile.email
         var user = await UserModel.findOne({email:profile.email})
+        var pwd = generatePassword()
         if(!user){
-          user = await UserModel.create({email,name})
+          user = await UserModel.create({email,name,pwd})
           const msg = {
             to:email,
             from:process.env.email,

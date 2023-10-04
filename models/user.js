@@ -10,24 +10,12 @@ const userSchema = new Schema({
     role:{type:String,enum:['admin','user'],default:'user'}
 })
 
-function generatePassword(length = 8) {
-    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let password = '';
-  
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * charset.length);
-      password += charset.charAt(randomIndex);
-    }
-  
-    return password;
-  }
-
 
   userSchema.pre('save', async function(next) {
     if (!this.isModified('password')) return next();
   
     try {
-      const generatedPassword =this.password || generatePassword();
+      const generatedPassword =this.password;
       const salt = await bcrypt.genSalt(10);
       this.password = await bcrypt.hash(generatedPassword, salt);
       next();

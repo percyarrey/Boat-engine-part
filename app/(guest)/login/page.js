@@ -196,7 +196,7 @@ export default function Page() {
       </div>
       <div className='md:flex-1 hidden md:flex justify-center items-center'>
       <div className=' relative h-full w-full'>
-            <Image layout='fill' objectFit='contain'  src='/homepage/discount.jpg' alt='sign in image'/>
+            <Image layout='fill' style={{borderRadius:'100px',overflow:'hidden'}}  objectFit='contain'  src='/homepage/login.png' alt='sign in image'/>
         </div>
       </div>
     </section>
