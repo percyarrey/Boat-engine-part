@@ -3,6 +3,11 @@ import connectDB from "../../../../utils/connectDB";
 import NextAuth from "next-auth/next";
 import  CredentialsProvider  from "next-auth/providers/credentials";
 import  GoogleProvider  from "next-auth/providers/google";
+
+
+//EMAIL
+import {sendEmail} from '../../../../utils/sendgrid'
+
 export const authOptions={
   session:{
     strategy:'jwt',
