@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+
 import getOrder from '../../../services/getOrder'
 
 import Recentorder from '../../components/orders/recentorder'
@@ -9,7 +9,6 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '../../api/auth/[...nextauth]/route'
 export default async function Page() {
   const session = await getServerSession(authOptions)
-  console.log(session)
   const Orders = await getOrder(session.user.id,4,0)
   return (
     <div className='flex justify-center pb-12'>
@@ -27,15 +26,13 @@ export default async function Page() {
         </div>
 
         <hr className=' mt-4 pb-2'/>
-        <Recentorder e={Orders} />
         {
-          Orders /* && Orders.length>0 */?
-          <></>
-          /* Orders.map((e,index)=>{
+          Orders && Orders.length>0?
+          Orders.map((e,index)=>{
             return (
               <Recentorder e={e} key={index}/>
             )
-          }) */:
+          }):
           <>
               <div className='w-[100vw]' style={{display:'flex',minHeight:'15rem',justifyContent:'center',alignItems:'center'}} >
                 {/* <ClipLoader size={100} color='blue'/> */}{/* Loading */}
