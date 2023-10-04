@@ -10,16 +10,31 @@ const userSchema = new Schema({
     role:{type:String,enum:['admin','user'],default:'user'}
 })
 
-userSchema.pre('save',async function(next){
-    if(!this.isModified('password')) return next();
-        try{
-            const salt = await bcrypt.genSalt(10)
-            this.password = await bcrypt.hash(this.password, salt);
-            next()
-        } catch(error){
-            throw error;
-        }
-})
+function generatePassword(length = 8) {
+    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let password = '';
+  
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset.charAt(randomIndex);
+    }
+  
+    return password;
+  }
+
+
+  userSchema.pre('save', async function(next) {
+    if (!this.isModified('password')) return next();
+  
+    try {
+      const generatedPassword =this.password || generatePassword();
+      const salt = await bcrypt.genSalt(10);
+      this.password = await bcrypt.hash(generatedPassword, salt);
+      next();
+    } catch (error) {
+      throw error;
+    }
+  });
 
 userSchema.methods.comparePassword = async function (password){
     try{

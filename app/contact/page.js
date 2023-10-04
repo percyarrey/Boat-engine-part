@@ -1,19 +1,82 @@
 'use client'
 import axios from 'axios'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+
+
+//REACT SPINNER
+import { MoonLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
 
 function Page() {
-  const handleEmail=(e)=>{
-    e.preventDefault()
-    axios.post('/api/email')
-    .then(res=>{
-      res=res.data
-      console.log(res.message)
-    })
-    .catch(e=>{
-      console.log(e)
-    })
+  //REACT HOOK DECLARATION
+  const [loading, setLoading] = useState(false);
+const [data, setdata] = useState({
+  name: "",
+  email: "",
+  message: "",
+})
+
+const router = useRouter();
+
+// HANDLE CHANGE
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setdata((prev) => ({
+    ...prev,
+    [name]: value
+  }));
+};
+
+const handleEmail = async(e) => {
+  e.preventDefault();
+  const { name, email, message } = data;
+  if (loading === false) {
+    setLoading(true);
+    if (name && email && message) {
+      try {
+        const res = await axios.post('/api/email', {name:name,email:email,message:message});
+        if (res.data.msg) {
+          toast.success('Message sent Successfully', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          toast.error('Something went wrong! Please try again', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      toast.warn('Please fill in the information', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+    }
+    setLoading(false);
   }
+};
   return ( 
   <section className="mb-32 text-center">
     <div className="py-12 md:px-12">
@@ -27,24 +90,24 @@ function Page() {
                 {/*NAME */}
                 <div className='w-full'>
                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-start text-gray-900 dark:text-white">Name:</label>
-                    <input name='name' type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name"/>
+                    <input name='name' onChange={handleChange} required value={data.name} type="text" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter full name"/>
                 </div>
                 {/*EMAIL*/}
                 <div className='w-full mt-3'>
                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-start text-gray-900 dark:text-white">Email:</label>
-                    <input name='email' type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="abc@email.com"/>
+                    <input name='email' onChange={handleChange} required value={data.email} type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="abc@email.com"/>
                 </div>
 
                 <div className="bg-white mt-3 rounded-b-lg dark:bg-gray-800">
                   <label htmlFor="message" className="block text-start mb-2 text-sm font-medium text-gray-900 dark:text-white">Message :</label>
-                  <textarea id="message" rows="4" className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a message"></textarea>
+                  <textarea id="message" name='message' onChange={handleChange} required value={data.message} rows="4" className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a message"></textarea>
               </div>
                 <button
-                  type="button"
+                  type="submit"
                   data-te-ripple-init
                   onClick={handleEmail}
                   className="inline-block w-full rounded bg-[#0d6648] px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] lg:mb-0">
-                  Send
+                  {loading ? <div className='w-ful h-full flex justify-center'><MoonLoader color='white' size={20}/></div>:<span>Send</span>}
                 </button>
               </form>
             </div>

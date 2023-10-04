@@ -24,6 +24,19 @@ export const authOptions={
             throw Error('Email Already Exist')
           }
           user = await UserModel.create({email,name, password})
+          const msg = {
+            to:email,
+            from:process.env.email,
+            template_id: 'd-33e94435061d46619928402f0498b865',
+            dynamic_template_data: {
+              name: name,
+            },
+          };
+          try {
+            await sendEmail(msg);
+          } catch (error) {
+            console.error(error);
+          }
         }
         if(action==='login'){
           if(!user) throw Error('Wrong Username and Password')

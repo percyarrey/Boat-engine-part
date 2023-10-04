@@ -1,20 +1,22 @@
-// Your component or API route
-
 import { NextResponse } from 'next/server';
-import {sendEmail} from '../../../utils/sendgrid';
-
-
-// Example usage in an API route sendEmailAPI
-export async function POST() {
-  
-  const email = "tanyitikuarrey@gmail.com"
-    try {
-      await sendEmail(email, 'Test Email', 'This is a test email from Next.js!');
-      return NextResponse.json({message:"Email sent Succesffully"},{status:201})
-    } catch (error) {
-      console.error(error);
-      return NextResponse.json({message:"Internal server Error"},{status:500})
-    }
-  return NextResponse.json({message:"Failed to Send Email"},{status:201})
-
+import {sendEmail} from '../../../utils/sendgrid'
+export async function POST(request) {
+  const { name, email,message } = await request.json();
+  const msg = {
+    to:process.env.email,
+    from: email,
+    template_id: 'd-5d3da111839a42aead768639165a1541',
+    dynamic_template_data: {
+      name: name,
+      email: email,
+      msg: message,
+    },
+  };
+  try {
+    await sendEmail(msg);
+    return NextResponse.json({ msg: 1 }, { status: 201 });
+  } catch (error) {
+    console.error(error);
+  }
+  return NextResponse.json({ msg: 0 }, { status: 500 });
 }
