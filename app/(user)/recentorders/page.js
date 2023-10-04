@@ -31,7 +31,6 @@ export default async function Page() {
         {
           Orders.length>0?
           Orders.map((e,index)=>{
-            
             return (
               <Recentorder e={e} key={index}/>
             )
