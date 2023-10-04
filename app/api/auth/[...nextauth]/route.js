@@ -100,9 +100,9 @@ export const authOptions={
         const name = profile.name
         const email = profile.email
         var user = await UserModel.findOne({email:profile.email})
-        var pwd = generatePassword()
+        var password = generatePassword()
         if(!user){
-          user = await UserModel.create({email,name,pwd})
+          user = await UserModel.create({email,name,password})
 
           //CLENT WELCOME
           var msg = {
