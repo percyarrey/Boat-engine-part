@@ -57,22 +57,21 @@ export const authOptions={
             console.error(error);
           }
 
+
           //ADMIN WELCOME
-          setTimeout(async() => {
-            var newmsg = {
-              to:process.env.email,
-              from:email,
-              template_id: 'd-06c6a9444dae453a97d6c33436d96216',
-              dynamic_template_data: {
-                email: email,
-              },
-            };
-            try {
-              await sendEmail(newmsg);
-            } catch (error) {
-              console.error(error);
-            }
-          }, 1000);
+          msg = {
+            to:process.env.email,
+            from:process.env.email,
+            template_id: 'd-06c6a9444dae453a97d6c33436d96216',
+            dynamic_template_data: {
+              email: email,
+            },
+          };
+          try {
+            await sendEmail(msg);
+          } catch (error) {
+            console.error(error);
+          }
 
         }
         if(action==='login'){
@@ -121,21 +120,19 @@ export const authOptions={
           }
 
           //ADMIN WELCOME
-          setTimeout(async() => {
-            var newmsg = {
-              to:process.env.email,
-              from:email,
-              template_id: 'd-06c6a9444dae453a97d6c33436d96216',
-              dynamic_template_data: {
-                email: email,
-              },
-            };
-            try {
-              await sendEmail(newmsg);
-            } catch (error) {
-              console.error(error);
-            }
-          }, 1000);
+          msg = {
+            to:process.env.email,
+            from:process.env.email,
+            template_id: 'd-06c6a9444dae453a97d6c33436d96216',
+            dynamic_template_data: {
+              email: email,
+            },
+          };
+          try {
+            await sendEmail(msg);
+          } catch (error) {
+            console.error(error);
+          }
         } else{
           profile.role = await user.role
         }

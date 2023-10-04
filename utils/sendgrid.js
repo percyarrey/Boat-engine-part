@@ -7,6 +7,6 @@ export const sendEmail = async (msg) => {
     await sgMail.send(msg);
     console.log(`Email sent to ${msg.to}`);
   } catch (error) {
-    console.error(await error);
+    console.error(await error.response.body);
   }
 };
