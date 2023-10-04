@@ -30,11 +30,12 @@ export default async function Page() {
 
         {
           Orders.length>0?
-          Orders.map((e,index)=>{
+          <></>
+          /* Orders.map((e,index)=>{
             return (
               <Recentorder e={e} key={index}/>
             )
-          }):
+          }) */:
           <>
               <div className='w-[100vw]' style={{display:'flex',minHeight:'15rem',justifyContent:'center',alignItems:'center'}} >
                 {/* <ClipLoader size={100} color='blue'/> */}{/* Loading */}
