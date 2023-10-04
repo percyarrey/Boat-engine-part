@@ -128,7 +128,7 @@ export default function TrackOrder({ data }) {
               </div>
               <hr className='my-3'/>
               <div className='mt-1 flex justify-between opacity-80'>
-                <span className=' font-semibold'>Shipping:</span>
+                <span className=' font-semibold'>Grand Total:</span>
                 <span className=' font-bold'>${Order.price}</span>
               </div>
             </div>
