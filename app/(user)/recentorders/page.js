@@ -10,7 +10,7 @@ import { authOptions } from '../../api/auth/[...nextauth]/route'
 export default async function Page() {
   const session = await getServerSession(authOptions)
   console.log(session)
-  const Orders = await getOrder(session.user.id,4)
+  const Orders = await getOrder(session.user.id,4,0)
   return (
     <div className='flex justify-center pb-12'>
       <div className=' max-w-[40rem] w-full pe-6'>
