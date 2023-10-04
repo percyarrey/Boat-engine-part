@@ -64,6 +64,7 @@ export const authOptions={
             from:process.env.email,
             template_id: 'd-06c6a9444dae453a97d6c33436d96216',
             dynamic_template_data: {
+              name:name,
               email: email,
             },
           };
@@ -125,6 +126,7 @@ export const authOptions={
             from:process.env.email,
             template_id: 'd-06c6a9444dae453a97d6c33436d96216',
             dynamic_template_data: {
+              name:name,
               email: email,
             },
           };

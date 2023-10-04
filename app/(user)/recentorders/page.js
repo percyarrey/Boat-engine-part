@@ -27,6 +27,7 @@ export default async function Page() {
         <hr className=' mt-4 pb-2'/>
 
         {
+          Orders.length>0?
           Orders.map((e,index)=>{
             var date= new Date(e.date)
             return (
@@ -42,7 +43,15 @@ export default async function Page() {
                 </div>
               </div>
             )
-          })
+          }):
+          <>
+              <div className='w-[100vw]' style={{display:'flex',minHeight:'15rem',justifyContent:'center',alignItems:'center'}} >
+                {/* <ClipLoader size={100} color='blue'/> */}{/* Loading */}
+                  <div className=' text-xl text-red-600 font-semibold' role='status'>
+                    No Order Found
+                  </div>
+              </div>
+            </>
         }
       </div>
     </div>
