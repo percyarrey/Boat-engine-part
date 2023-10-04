@@ -6,9 +6,9 @@ import { getServerSession } from 'next-auth'
 
 import { authOptions } from '../../api/auth/[...nextauth]/route'
 export default async function Page() {
-  /* const session = await getServerSession(authOptions)
-
-  const Orders = await getOrder(session.user.id,4) */
+  const session = await getServerSession(authOptions)
+  console.log(session)
+  /*const Orders = await getOrder(session.user.id,4) */
   var Orders;
   return (
     <div className='flex justify-center pb-12'>
