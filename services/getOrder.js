@@ -1,3 +1,4 @@
+'use server'
 import Order from "../models/Order";
 import Products from "../models/Products";
 import connectDB from "../utils/connectDB";
