@@ -27,9 +27,9 @@ export default async function Page() {
         </div>
 
         <hr className=' mt-4 pb-2'/>
-
+        <Recentorder e={Orders} />
         {
-          Orders.length>0?
+          Orders /* && Orders.length>0 */?
           <></>
           /* Orders.map((e,index)=>{
             return (
