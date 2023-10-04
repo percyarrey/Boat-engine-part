@@ -8,8 +8,7 @@ import { authOptions } from '../../api/auth/[...nextauth]/route'
 export default async function Page() {
   const session = await getServerSession(authOptions)
   console.log(session)
-  /*const Orders = await getOrder(session.user.id,4) */
-  var Orders;
+  const Orders = await getOrder(session.user.id,4)
   return (
     <div className='flex justify-center pb-12'>
       <div className=' max-w-[40rem] w-full pe-6'>
@@ -30,14 +29,14 @@ export default async function Page() {
         {
           Orders>0?
           Orders.map((e,index)=>{
-            var date= new Date(e.date)
+            /* var date= new Date(e.date) */
             return (
               <div key={index} className='py-4 px-2 flex justify-between'>
                 <div className=' font-semibold'>
                   {e.OrderId}
                 </div>
                 <div>
-                  {date.getDate()}-{date.toLocaleString('en-US', { month: 'short' })}-{date.getFullYear()} - {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
+                  {/* {date.getDate()}-{date.toLocaleString('en-US', { month: 'short' })}-{date.getFullYear()} - {date.getHours()}:{date.getMinutes()}:{date.getSeconds()} */}
                 </div>
                 <div>
                   <Link className='bg-[#0E9F6E] p-2 rounded-md shadow-sm text-white' href={'/trackorder/'+e.OrderId}>Track Order</Link>
