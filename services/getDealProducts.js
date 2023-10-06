@@ -1,7 +1,7 @@
 import Products from "../models/Products";
 import connectDB from "../utils/connectDB";
 
-export const getDealProduct = async (page, searchParams,size = 2) => {
+export const getDealProduct = async (page, searchParams,size = 1) => {
     var data;
     var hasNextPage;
     page = page * size;
