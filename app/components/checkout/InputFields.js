@@ -49,6 +49,7 @@ export default function InputFields(props) {
     e.preventDefault();
     if(loading === false){
       if(fname&&email&&num&&pin&&house&&area&&land&&town&&state){
+        console.log(userId)
         setLoading(true)
         data.country=country
         data.productId=props.data._id
