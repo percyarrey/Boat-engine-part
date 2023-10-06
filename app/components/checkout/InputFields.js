@@ -53,8 +53,6 @@ export default function InputFields(props) {
         data.country=country
         data.productId=props.data._id
         data.userId=user?.id
-        console.log(userId)
-        console.log(data)
         await axios.post('/api/crudorder',data)
         .then(res=>{
           res=res.data

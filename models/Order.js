@@ -30,11 +30,7 @@ const OrderSchema = new mongoose.Schema({
     land: String,
     town: String,
     state: String,
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-        required: true
-    },
+    userId: String,
     productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Products',
