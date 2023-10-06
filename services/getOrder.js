@@ -3,7 +3,7 @@ import Order from "../models/Order";
 import Products from "../models/Products";
 import connectDB from "../utils/connectDB";
 
-export const getOrder = async(id,type=0,page=0)=>{
+export const getOrder = async(id,type=0,page=0,status)=>{
     try{
         var order;
         await connectDB()
@@ -23,10 +23,19 @@ export const getOrder = async(id,type=0,page=0)=>{
             order = await Order.find({new:1}).countDocuments()
         }
         if(type===2){
+            var npage,pages;
             page=page*5
-            order = await Order.find({}).limit(5).sort({new:-1}).skip(page)
-            var npage = await Order.find({}).limit(5).sort({new:-1}).skip(page+5).countDocuments()>0
-            return {order:JSON.parse(JSON.stringify(order)),npage:npage}
+            if(status){
+                order = await Order.find({status:status}).limit(5).sort({new:-1}).skip(page)
+                npage = await Order.find({status:status}).limit(5).sort({new:-1}).skip(page+5).countDocuments()>0
+                pages= await Order.find({status:status}).countDocuments()
+            }else{
+                order = await Order.find({}).limit(5).sort({new:-1}).skip(page)
+                npage = await Order.find({}).limit(5).sort({new:-1}).skip(page+5).countDocuments()>0
+                pages= await Order.find({}).sort({new:-1}).countDocuments()
+            }
+            pages = Math.ceil(pages/5)
+            return {order:JSON.parse(JSON.stringify(order)),npage:npage,pages:pages}
         }
         if(type===4){
             order = await Order.find({userId:id});

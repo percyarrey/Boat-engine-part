@@ -2,6 +2,7 @@ import connectDB from "../../../utils/connectDB";
 import Order from "../../../models/Order";
 import {NextResponse } from "next/server";
 import Products from "../../../models/Products";
+import { sendEmail } from "../../../utils/sendgrid";
 
 export async function POST(request){
     var {fname,email,country,num,pin,house,area,land,town,state,productId,userId,price} = await request.json();
@@ -10,12 +11,14 @@ export async function POST(request){
     if(order){
       const address = order.state + ", " + order.town + ", " + ", " + order.area + ", " + order.house + ", " + order.land
 
-      var date = new Date(order.date)
-      var deliverDate = date.setDate(deliverDate.getDate() + 7)
-      var deliverDay = deliverDate.toLocaleString('en-US', { day: 'long' })
-      var deliverMonth = deliverDate.toLocaleString('en-US', { month: 'long' })
+      var date = new Date(order.date);
+      date.setDate(date.getDate() + 7);
+      var cdate = new Date(order.date);
 
-      date = deliverDay + ", " + deliverDate.getDate() + " " + deliverMonth + " " + deliverDate.getFullYear()
+      var deliverDay = date.toLocaleString('en-US', { weekday: 'long' })
+      var deliverMonth = date.toLocaleString('en-US', { month: 'long' })
+
+      date = deliverDay + ", " + date.getDate() + " " + deliverMonth + " " + date.getFullYear()
 
 
       var Product = await Products.find({_id:order.productId})
@@ -33,12 +36,13 @@ export async function POST(request){
           email: order.email,
           country:order.country,
           address:address,
-          date:date,
+          Ddate:date,
+          date:cdate.getDate() + ", " +cdate.toLocaleString('en-US', { month: 'short' }) + " " + cdate.getFullYear(),
           pname:Product.productname,
           brand:Product.brand,
           year:Product.year,
           price:order.price,
-          imagesrc:Product.image
+          image:`<img alt="${Product.productname}" src="{{{${Product.image}}}}" width="104" height="104"/>`,
         },
       };
       try {
@@ -52,7 +56,7 @@ export async function POST(request){
       msg = {
         to:process.env.email,
         from:process.env.email,
-        template_id: 'd-f432f7e18a2749869b53acea6e023ddb',
+        template_id: 'd-6b8c778f365a4d39969bd7a4c302dc65',
         dynamic_template_data: {
           orderid:order.OrderId,
           name:order.fname,
@@ -64,14 +68,14 @@ export async function POST(request){
           brand:Product.brand,
           year:Product.year,
           price:order.price,
-          imagesrc:Product.image
+          image:`<img alt="${Product.productname}" src="${Product.image}" width="104" height="104"/>`,
         },
       };
-      /* try {
+      try {
         await sendEmail(msg);
       } catch (error) {
         console.error(error);
-      } */
+      }
 
       return NextResponse.json({res:true,id:order.OrderId},{status:201})
     }
@@ -82,9 +86,55 @@ export async function PUT(request){
   var {id,status} =  await request.json()
   if(id){
     var order = await Order.findOne({OrderId:id})
+    var date = new Date()
     if(order){
       order.status=status
+      const address = order.state + ", " + order.town + ", " + ", " + order.area + ", " + order.house + ", " + order.land
+
+      var date = new Date(order.date);
+      date.setDate(date.getDate() + 7);
+      var cdate = new Date(order.date);
+
+      var deliverDay = date.toLocaleString('en-US', { weekday: 'long' })
+      var deliverMonth = date.toLocaleString('en-US', { month: 'long' })
+
+      date = deliverDay + ", " + date.getDate() + " " + deliverMonth + " " + date.getFullYear()
+
+
+      var Product = await Products.find({_id:order.productId})
+      Product=Product[0]
+
+
+      //CLIENT ORDER
+      var msg = {
+        to:order.email,
+        from:process.env.email,
+        template_id: 'd-016765037fe24258824b2e38bddcfeed',
+        dynamic_template_data: {
+          orderid:order.OrderId,
+          name:order.fname,
+          email: order.email,
+          country:order.country,
+          address:address,
+          status:order.status,
+          Ddate:date,
+          date:cdate.getDate() + ", " +cdate.toLocaleString('en-US', { month: 'short' }) + " " + cdate.getFullYear(),
+          pname:Product.productname,
+          brand:Product.brand,
+          year:Product.year,
+          price:order.price,
+          image:`<img alt="${Product.productname}" src="{{{${Product.image}}}}" width="104" height="104"/>`,
+        },
+      };
+      try {
+        await sendEmail(msg);
+      } catch (error) {
+        console.error(error);
+      }
+
+      order.new=0
       order.save()
+
       return NextResponse.json({res:1,id:order.OrderId},{status:201})
     }
   }

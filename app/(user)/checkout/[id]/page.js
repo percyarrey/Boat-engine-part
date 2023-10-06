@@ -86,7 +86,7 @@ export default async function Page({params}) {
     </div>
 
     <div className='flex justify-center'>
-      <InputFields data={data} user={session.user}/>
+      <InputFields data={data} user={session?.user}/>
     </div>
    </div>
   )

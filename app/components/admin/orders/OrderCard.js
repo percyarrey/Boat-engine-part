@@ -70,7 +70,7 @@ const OrderCard = ({ order }) => {
         <p className="card-text">Date: {date.getDate()}-{date.toLocaleString('en-US', { month: 'short' })}-{date.getFullYear()} - {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}</p>
 
         <p className="mb-4">
-          Status:
+          Update status:
                     <select className='ml-2 rounded-md h-9' onChange={handleChange} value={order.status}>
                       <option value={'Pending'}>Pending</option>
                       <option value={'Processing'}>Processing</option>
