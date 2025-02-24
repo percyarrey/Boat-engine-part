@@ -28,7 +28,7 @@ export async function POST(request){
       //CLIENT ORDER
       var msg = {
         to:email,
-        from:process.env.email,
+        from:process.env.EMAIL,
         template_id: 'd-f432f7e18a2749869b53acea6e023ddb',
         dynamic_template_data: {
           orderid:order.OrderId,
@@ -54,8 +54,8 @@ export async function POST(request){
 
       //ADMIN ORDER
       msg = {
-        to:process.env.email,
-        from:process.env.email,
+        to:process.env.EMAIL,
+        from:process.env.EMAIL,
         template_id: 'd-6b8c778f365a4d39969bd7a4c302dc65',
         dynamic_template_data: {
           orderid:order.OrderId,
@@ -108,7 +108,7 @@ export async function PUT(request){
       //CLIENT ORDER
       var msg = {
         to:order.email,
-        from:process.env.email,
+        from:process.env.EMAIL,
         template_id: 'd-016765037fe24258824b2e38bddcfeed',
         dynamic_template_data: {
           orderid:order.OrderId,

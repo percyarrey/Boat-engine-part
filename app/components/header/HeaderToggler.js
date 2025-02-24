@@ -34,7 +34,7 @@ export default function HeaderToggler() {
     })
   },[])
   /* h-[3rem] sm:h-[2rem] */
-  if(isActive('/login') || isActive('/signup')){
+  if(isActive('/login') || isActive('/register')){
     return null
   }
   return (

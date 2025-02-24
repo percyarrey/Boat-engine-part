@@ -17,7 +17,7 @@ import { signOut, useSession } from 'next-auth/react';
   const isActive = (path) =>{
     return pathname === path;
   }
-  if(isActive('/login') || isActive('/signup')){
+  if(isActive('/login') || isActive('/register')){
     return null
   }
    return (

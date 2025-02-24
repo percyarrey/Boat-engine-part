@@ -89,7 +89,7 @@ function Header() {
       e.target.classList.toggle('hidden')
     }
   }
-  if(isActive('/login') || isActive('/signup')){
+  if(isActive('/login') || isActive('/register')){
     return null
   }
   return (
@@ -180,9 +180,9 @@ function Header() {
                       </li>
                       <hr/>
                       <li>
-                        <Link href="/signup" className="flex gap-4 px-4 py-2 text-md w-full text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                        <Link href="/register" className="flex gap-4 px-4 py-2 text-md w-full text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                           <FaUserPlus className="mr-2 mt-1" />
-                          Sign Up
+                          Register
                         </Link>
                       </li>
                       </ul>

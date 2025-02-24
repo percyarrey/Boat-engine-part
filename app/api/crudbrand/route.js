@@ -12,7 +12,6 @@ export async function GET(){
 
 export async function POST(request){
     var {name} = await request.json();
-    console.log(name)
     await connectDB()
     const result = await Brand.findOne({name:name})
     if(result){

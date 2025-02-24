@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 
 export default async function PrivateLayout({children}){
     const session = await getServerSession(authOptions)
-    if(!session?.user) redirect('/signup')
+    if(!session?.user) redirect('/register')
 
     return <>{children}</>
 

@@ -1,0 +1,27 @@
+[{
+  "_id": {
+    "$oid": "67456f76ffbef3b0643d99d2"
+  },
+  "fname": "Percy",
+  "email": "tanyitikuarrey@gmail.com",
+  "country": "United States",
+  "num": "6445",
+  "pin": "234",
+  "house": "ASDF",
+  "area": "ASDF",
+  "land": "ADF",
+  "town": "ASDF",
+  "state": "GAF",
+  "userId": "67456b1b9db5b885955026ae",
+  "productId": {
+    "$oid": "67456f07ffbef3b0643d99ac"
+  },
+  "price": 799.98,
+  "status": "Processing",
+  "new": 0,
+  "OrderId": "F3Q0Um3y3j",
+  "date": {
+    "$date": "2024-11-26T06:49:26.618Z"
+  },
+  "__v": 0
+}]

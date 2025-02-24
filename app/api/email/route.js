@@ -3,7 +3,7 @@ import {sendEmail} from '../../../utils/sendgrid'
 export async function POST(request) {
   const { name, email,message } = await request.json();
   const msg = {
-    to:process.env.email,
+    to:process.env.EMAIL,
     from: email,
     template_id: 'd-5d3da111839a42aead768639165a1541',
     dynamic_template_data: {

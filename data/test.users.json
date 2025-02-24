@@ -1,0 +1,10 @@
+[{
+  "_id": {
+    "$oid": "67456b1b9db5b885955026ae"
+  },
+  "email": "tanyitikuarrey@gmail.com",
+  "name": "Percy",
+  "password": "$2b$10$Vt3Tdan9TyRKb1tdMfAFu.RFZNiGETczWMHT8suFYc0UMfUA9b7LK",
+  "role": "admin",
+  "__v": 0
+}]

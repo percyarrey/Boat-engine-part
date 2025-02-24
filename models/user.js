@@ -4,11 +4,70 @@ import { Document,Schema } from "mongoose";
 import bcrypt from 'bcrypt'
 
 const userSchema = new Schema({
-    email:{type:String,required:true,unique:true},
-    name:{type:String,required:true,trim:true},
-    password:{type:String},
-    role:{type:String,enum:['admin','user'],default:'user'}
-})
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    lowercase: true,
+    validate: {
+      validator: function(v) {
+        return /^([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})$/i.test(v);
+      },
+      message: props => `${props.value} is not a valid email!`
+    },
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 8,
+    validate: {
+      validator: function(v) {
+        return /[A-Z]/.test(v); // Check for at least one uppercase letter
+      },
+      message: 'Password must contain at least one uppercase letter.',
+    },
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  verificationCode: {
+    type: String,
+    required: false,
+  },
+  verificationCodeExpires: {
+    type: Date,
+    required: false,
+  },
+  resetPasswordCode: {
+    type: String,
+    required: false,
+  },
+  resetPasswordExpires: {
+    type: Date,
+    required: false,
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin'], // You can add more roles if needed
+    default: 'user',
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 
   userSchema.pre('save', async function(next) {

@@ -12,7 +12,7 @@ import {signIn} from 'next-auth/react'
 
 import Image from 'next/legacy/image'
 import { Button } from '@mui/material'
-
+import { verifyEmail } from '../../../server actions/auth/actions'
 //NAVIGATION
 import {useRouter } from 'next/navigation'
 
@@ -60,9 +60,10 @@ export default function Page() {
                 action:'signin',
                 redirect:false
               })
-              .then(res=>{
+              .then(async res=>{
+                
                 if(res.error===null){
-                  toast.success('Sign Up Successfull', {
+                  toast.success('Sign Up Successfully', {
                   position: "top-center",
                   autoClose: 2000,
                   hideProgressBar: false,
@@ -72,9 +73,23 @@ export default function Page() {
                   progress: undefined,
                   theme: "light",
                   });
+                  try {
+                    await verifyEmail(data.email);
                   setTimeout(() => {
-                    router.replace('/')
-                  }, 1500);
+                    router.replace('/verifyemail')
+                  }, 500);
+                  } catch (error) {
+                    toast.warn('Failed to send Verify email', {
+                      position: "top-center",
+                      autoClose: 2000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: 'light',
+                      });
+                  }
                 }else if(res.error==="Email Already Exist"){
                   toast.warn(res.error, {
                     position: "top-center",
@@ -102,6 +117,7 @@ export default function Page() {
                 setLoading(false)
               })
               .catch(error=>{
+                console.log(error)
                   toast.error('Something went wrong !Try Again', {
                     position: "top-center",
                     autoClose: 2000,
@@ -177,7 +193,7 @@ export default function Page() {
                           Already have an Account? <Link href="/login" className="font-semibold mytxt hover:underline dark:text-blue-500">Log In</Link>
                       </p>
                       <p className="text-md font-light text-gray-500 dark:text-gray-400">
-                            Don’t want to Sign up? <Link href="/" className="font-semibold text-red-600 hover:underline dark:text-red-500">Return Home</Link>
+                            Don’t want to Register? <Link href="/" className="font-semibold text-red-600 hover:underline dark:text-red-500">Return Home</Link>
                         </p>
                     </div>
                 </form>
