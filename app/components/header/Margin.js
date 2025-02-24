@@ -5,9 +5,9 @@ export default function Margin() {
     //NAVIGATION
   const pathname =usePathname()
   const isActive = (path) =>{
-    return pathname === path;
+    return pathname.startsWith(path);
   }
-  if(isActive('/login') || isActive('/register')){
+  if(isActive('/auth')){
     return null
   }
   return (

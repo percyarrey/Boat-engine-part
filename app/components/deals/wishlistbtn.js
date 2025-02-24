@@ -42,7 +42,7 @@ export default function Wishlistbtn(props) {
     }
   return (
     <>
-        <Button onClick={()=>{router.push('/checkout/' + props._id)}}  style={{width:'8rem',backgroundColor:'#00442E',borderRadius:'9999px',textTransform:'none'}} variant='contained' color='success'>
+        <Button onClick={()=>{router.push('/user/checkout/' + props._id)}}  style={{width:'8rem',backgroundColor:'#00442E',borderRadius:'9999px',textTransform:'none'}} variant='contained' color='success'>
               Place Order
         </Button>
         {

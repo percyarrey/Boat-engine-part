@@ -8,7 +8,7 @@ export default function HeaderToggler() {
   //NAVIGATION
   const pathname =usePathname()
   const isActive = (path) =>{
-    return pathname === path;
+    return pathname.startsWith(path);
   }
   const Topheader = useRef(null)
   
@@ -34,7 +34,7 @@ export default function HeaderToggler() {
     })
   },[])
   /* h-[3rem] sm:h-[2rem] */
-  if(isActive('/login') || isActive('/register')){
+  if(isActive('/auth')){
     return null
   }
   return (

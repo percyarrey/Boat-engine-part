@@ -45,7 +45,7 @@ function Header() {
   //NAVIGATION
   const pathname =usePathname()
   const isActive = (path) =>{
-    return pathname === path;
+    return pathname.startsWith(path) ;
   }
   
   const [Menu,setMenu] = useState(false)
@@ -89,7 +89,7 @@ function Header() {
       e.target.classList.toggle('hidden')
     }
   }
-  if(isActive('/login') || isActive('/register')){
+  if(isActive('/auth')){
     return null
   }
   return (
@@ -147,10 +147,10 @@ function Header() {
                         data?.user?.role ==='admin'&&
                           <>
                             <li>
-                              <Link href="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</Link>
+                              <Link href="/admin/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</Link>
                             </li>
                             <li>
-                              <Link href="/manageproduct" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Add Product</Link>
+                              <Link href="/admin/manageproduct" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Add Product</Link>
                             </li>
                           </>
                           
@@ -159,10 +159,10 @@ function Header() {
                         <Link href="/wishlist" className="flex justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Wishlist <div className=' text-white rounded-full bg-red-900 px-2'>{wishlist.length}</div></Link>
                       </li>
                       <li>
-                        <Link href="/recentorders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Recent orders</Link>
+                        <Link href="/user/recentorders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Recent orders</Link>
                       </li>
                       <li>
-                        <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</Link>
+                        <Link href="/user/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</Link>
                       </li>
                       <li>
                         <button onClick={()=>{signOut()}} className="block px-4 py-2 w-full text-start text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</button>
@@ -173,14 +173,14 @@ function Header() {
                   <div className="px-0 py-3">
                     <ul className="py-0" aria-labelledby="user-menu-button">
                     <li>
-                        <Link href="/login" className="min-w-[8rem] px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-md dark:text-gray-200 dark:hover:text-white flex gap-5">
+                        <Link href="/auth/login" className="min-w-[8rem] px-4 py-2 text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-md dark:text-gray-200 dark:hover:text-white flex gap-5">
                           <FaSignInAlt className="mr-2 mt-1" />
                           Login
                         </Link>
                       </li>
                       <hr/>
                       <li>
-                        <Link href="/register" className="flex gap-4 px-4 py-2 text-md w-full text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                        <Link href="/auth/register" className="flex gap-4 px-4 py-2 text-md w-full text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                           <FaUserPlus className="mr-2 mt-1" />
                           Register
                         </Link>

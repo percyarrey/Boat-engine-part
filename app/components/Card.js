@@ -208,14 +208,14 @@ export default function Card(props) {
           </div>
           <div name='actions' className='flex justify-between mt-auto'>
           {
-            !isActive('/customize')?
+            !isActive('/admin/customize')?
                 <>
-                    <Button  onClick={()=>{router.push('/checkout/'+props._id)}} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',backgroundColor:'#066E4C',color:'white',marginTop:'0.5rem',marginBottom:'0.5rem'}}>Place an Order</Button>
+                    <Button  onClick={()=>{router.push('/user/checkout/'+props._id)}} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',backgroundColor:'#066E4C',color:'white',marginTop:'0.5rem',marginBottom:'0.5rem'}}>Place an Order</Button>
                     <Button variant='outlined' onClick={()=>{router.push('/deals/'+props._id)}} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',color:'#066E4C',marginTop:'0.5rem',marginBottom:'0.5rem'}}>View Details</Button>
                 </>
             :
                 <>
-                <Button onClick={()=>{router.push('/manageproduct/'+props._id)}} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',backgroundColor:'#066E4C',color:'white',marginTop:'0.5rem',marginBottom:'0.5rem'}}>Edit</Button>
+                <Button onClick={()=>{router.push('/admin/manageproduct/'+props._id)}} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',backgroundColor:'#066E4C',color:'white',marginTop:'0.5rem',marginBottom:'0.5rem'}}>Edit</Button>
                 <Button onClick={handleDelete} style={{border:'1px solid',textTransform:'none',borderRadius:'9999px',paddingRight:'1rem',paddingLeft:'1rem',backgroundColor:'#D32F2F',color:'white',marginTop:'0.5rem',marginBottom:'0.5rem'}}>Delete</Button>
                 </>
 

@@ -17,7 +17,7 @@ export default function Orderbtn({page,npage,pages,searchParams}) {
   //HANDLE SEARCH
   const handlePage=(e)=>{
     var pg= page + parseInt(e.target.id)<0 ? 0 : page + parseInt(e.target.id)
-    router.push('/orders' + '?' + createQueryString('page',pg))
+    router.push('/admin/orders' + '?' + createQueryString('page',pg))
   }
   return (
     <div className='flex justify-around py-4'>

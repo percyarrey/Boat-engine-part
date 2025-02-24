@@ -15,7 +15,7 @@ export default function SortStatus({searchParams}) {
     [searchParams]
   )
     const handleChange=(e)=>{
-        router.push('/orders' + '?' + "status"+ "="+e.target.value)
+        router.push('/admin/orders' + '?' + "status"+ "="+e.target.value)
     }
   return (
     <div  className='flex justify-end pr-6 pt-5 opacity-80'>

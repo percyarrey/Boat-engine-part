@@ -15,9 +15,9 @@ import { signOut, useSession } from 'next-auth/react';
   //NAVIGATION
   const pathname =usePathname()
   const isActive = (path) =>{
-    return pathname === path;
+    return pathname.startsWith(path);
   }
-  if(isActive('/login') || isActive('/register')){
+  if(isActive('/auth')){
     return null
   }
    return (
@@ -57,11 +57,11 @@ import { signOut, useSession } from 'next-auth/react';
                                 {
                                   status !== 'authenticated'?
                                       <>
-                                        <li><Link href="/login">Login</Link></li>
-                                        <li><Link href="/register">Register</Link></li>
+                                        <li><Link href="/auth/login">Login</Link></li>
+                                        <li><Link href="/auth/register">Register</Link></li>
                                       </>
                                   :
-                                      <li><Link href="/profile">Profile</Link></li>
+                                      <li><Link href="/user/profile">Profile</Link></li>
                                 }
                                   <li><Link href="/cart">Checkout</Link></li>
                               </ul>

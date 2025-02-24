@@ -15,7 +15,7 @@ export default function Carouselcontent(props) {
               <span className="text-white text-sm sm:text-lg">Grab Up to <b style={{color:props.btn}}>{props.discount}%</b> Off, On This Engine</span>
             </div>
             <div>
-              <Button onClick={()=>{router.push('/checkout/'+props.data._id)}} variant="contained" style={{backgroundColor:props.btn,borderRadius:'9999px',padding:'0.6rem',paddingLeft:'3rem',paddingRight:'3rem'}}>
+              <Button onClick={()=>{router.push('/user/checkout/'+props.data._id)}} variant="contained" style={{backgroundColor:props.btn,borderRadius:'9999px',padding:'0.6rem',paddingLeft:'3rem',paddingRight:'3rem'}}>
                 Buy Now
               </Button>
             </div>
