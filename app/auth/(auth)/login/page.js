@@ -81,7 +81,7 @@ export default function Page() {
                   theme: "light",
                 });
                 setTimeout(() => {
-                    router.push('/')
+                    router.refresh()
                   
                 }, 500);
               } else if (res.error === "Wrong Username and Password") {
